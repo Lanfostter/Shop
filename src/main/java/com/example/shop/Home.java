@@ -39,15 +39,6 @@ public class Home {
 	@Autowired
 	CategoryRepository categoryRepository;
 
-	/*
-	 * @GetMapping("/home") public String home(Model model, HttpServletRequest
-	 * request, RedirectAttributes redirectAttributes) {
-	 * request.getSession().setAttribute("productList", null); if
-	 * (model.asMap().get("success") != null) {
-	 * redirectAttributes.addFlashAttribute("success",
-	 * model.asMap().get("success").toString()); } return "redirect:/page/1"; }
-	 */
-
 	@GetMapping(value = "/download")
 	public void download(HttpServletResponse response, @RequestParam("image") String image) {
 		final String uploadFolder = "C:\\Users\\fostt\\eclipse-workspace\\shop\\src\\main\\resources\\static\\img\\";// tao
@@ -65,33 +56,6 @@ public class Home {
 		}
 	}
 
-	/*
-	 * @GetMapping("/page/{page}") public String showTicketPage(HttpServletRequest
-	 * request, @PathVariable int page, Model model,
-	 * 
-	 * @RequestParam(name = "name", required = false) String name) {
-	 * PagedListHolder<?> pagedListHolder = (PagedListHolder<?>)
-	 * request.getSession().getAttribute("productList"); int pagesize = 5;
-	 * List<ProductEntity> list; if (name == null && name.isEmpty()) { list =
-	 * (List<ProductEntity>) productRepository.findAll(); } else { list =
-	 * (List<ProductEntity>) productRepository.findByName(name); } if
-	 * (pagedListHolder == null) { pagedListHolder = new PagedListHolder<>(list);
-	 * pagedListHolder.setPageSize(pagesize); } else { final int goTopage = page -
-	 * 1; if (goTopage <= pagedListHolder.getPageCount() && goTopage >= 0) {
-	 * pagedListHolder.setPage(goTopage); } }
-	 * request.getSession().setAttribute("productList", pagedListHolder); int
-	 * current = pagedListHolder.getPage() + 1; int begin = Math.max(1, current -
-	 * list.size()); int end = Math.min(begin + 5, pagedListHolder.getPageCount());
-	 * int totalPageCount = pagedListHolder.getPageCount();
-	 * model.addAttribute("currentIndex", current); model.addAttribute("products",
-	 * pagedListHolder); model.addAttribute("beginIndex", begin);
-	 * model.addAttribute("endIndex", end); model.addAttribute("name", name == null
-	 * ? "" : name); model.addAttribute("category", categoryRepository.findAll());
-	 * model.addAttribute("totalPageCount", totalPageCount); return "index"; }
-	 */
-	/*
-	 * @PutMapping("/update") public
-	 */
 	@GetMapping("/home")
 	public String search(Model model, @RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "id", required = false) Integer id,
@@ -105,11 +69,11 @@ public class Home {
 
 		Sort sort = Sort.by("id").ascending();
 
-		/*
-		 * if (sortBy != null && sortBy.equals("name")) { sort =
-		 * Sort.by("name").ascending(); } else if (sortBy != null &&
-		 * sortBy.equals("date")) { sort = Sort.by("createdAt").ascending(); }
-		 */
+		if (sortBy != null && sortBy.equals("lowtohigh")) {
+			sort = Sort.by("price").ascending();
+		} else if (sortBy != null && sortBy.equals("hightolow")) {
+			sort = Sort.by("price").descending();
+		}
 
 		Pageable pageable = PageRequest.of(page, size, sort);
 

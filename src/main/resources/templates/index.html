@@ -204,7 +204,7 @@
 
 					<input type="checkbox" hidden id="mobile-sreach-checkbox"
 						class="header__search-checkbox">
-					<form th:action="@{/home}" method="get">
+					<form th:action="@{/home}" method="get" class="header__search">
 						<div class="header__search">
 							<div class="header__search-input-wrap">
 								<input type="text" th:value="${name}" name="name"
@@ -333,11 +333,13 @@
 							<h3 class="category__heading">Danh mục</h3>
 							<ul class="category-list">
 								<!-- active: category-itme--cative  -->
-								<li class="category-itme category-itme--cative"><a th:href="@{'/home?name='}"
-									class="category-item__link">Tất cả sản phẩm</a></li>
+								<li class="category-itme category-itme--cative"><a
+									th:href="@{'/home?name='}" class="category-item__link">Tất
+										cả sản phẩm</a></li>
 								<li th:each="c: ${category}"
-									class="category-itme category-itme--cative"><a th:href="@{'/home?name='}"
-									class="category-item__link" th:text="${c.name}"></a></li>
+									class="category-itme category-itme--cative"><a
+									th:href="@{'/home?name='}" class="category-item__link"
+									th:text="${c.name}"></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -354,10 +356,12 @@
 								<span class="select-input__label">Giá</span> <i
 									class=" select-input__icon fas fa-angle-down"></i>
 								<ul class="select-input__list">
-									<li class="select-input__item"><a href=""
-										class="select-input__link">Giá: Thấp đến cao</a></li>
-									<li class="select-input__item"><a href=""
+									<li class="select-input__item"><a
+										th:href="@{'/home?sortBy='+hightolow}"
 										class="select-input__link">Giá: Cao đến thấp</a></li>
+									<li class="select-input__item"><a
+										th:href="@{'/home?sortBy='+lowtohigh}"
+										class="select-input__link">Giá: Thấp đến cao</a></li>
 								</ul>
 							</div>
 
@@ -451,12 +455,12 @@
 								th:each="i: ${#numbers.sequence(0, totalPage-1)}"
 								th:class="${ i != page? 'pagination-item' : 'pagination-item--active'}"><a
 								class="pagination-item__link"
-								th:href="@{'/home?page='+ ${i} + '&name=' + ${name}}"
+								th:href="@{'/home?page='+ ${i} + '&name=' + ${name}+ '&sortBy=' + ${sortBy}}"
 								th:text="${i+1}"></a></li>
 
 							<li th:if="${totalPage > 0}" class="pagination-item"><a
 								class="pagination-item__link"
-								th:href="@{'/home?page='+ ${page + 1 >= totalPage ? (totalPage - 1) : (page + 1) } + '&name=' + ${name}}">
+								th:href="@{'/home?page='+ ${page + 1 >= totalPage ? (totalPage - 1) : (page + 1) } + '&name=' + ${name}+ '&sortBy=' + ${sortBy}}">
 									<i class="pagination-item__icon fas fa-angle-right"></i>
 							</a></li>
 						</ul>
