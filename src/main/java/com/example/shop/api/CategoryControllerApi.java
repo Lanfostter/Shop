@@ -33,7 +33,7 @@ public class CategoryControllerApi {
 		int lastIndex = originalFilename.lastIndexOf(".");
 		String ext = originalFilename.substring(lastIndex);
 		String imagineFilename = System.currentTimeMillis() + ext;
-		File newfile = new File("C:\\Users\\fostt\\eclipse-workspace\\shop\\src\\main\\resources\\img\\" + imagineFilename);
+		File newfile = new File("C:\\Users\\fostt\\eclipse-workspace\\shop\\src\\main\\resources\\static\\img\\" + imagineFilename);
 		FileOutputStream fileOutputStream;
 		try {
 			fileOutputStream = new FileOutputStream(newfile);
