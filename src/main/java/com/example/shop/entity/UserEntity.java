@@ -2,13 +2,15 @@ package com.example.shop.entity;
 
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,9 +31,11 @@ public class UserEntity {
 	private String username;
 	@Column(name = "u_password")
 	private String password;
-	@ManyToOne
-	@JoinColumn(name = "r_id")
-	private Role role;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name = "u_role")
+	@CollectionTable(name = "user_role", 
+		joinColumns = @JoinColumn(name = "u_id"))
+	private List<String> roles;
 	@OneToMany(mappedBy = "userEntity")
 	private List<Cart> carts;
 }

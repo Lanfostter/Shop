@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://img.icons8.com/color/480/shopee.png" type="image/gif" sizes="16x16">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-5.15.4/fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="icon" th:href="@{https://img.icons8.com/color/480/shopee.png}" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" th:href="@{css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome-5.15.4/fontawesome-free-5.15.4-web/css/all.min.css}">
     <title>Đăng Nhập Ngay | Shoppe Việt Nam</title>
 </head>
 <style>
@@ -44,16 +44,16 @@
         <div class="banner-sale">
             <!-- thay bg o day -->
             <div class="banner-sale__img" style="background-image: url('');">
-                <form action="" id="form">
+                <form th:action="@{/login}" id="form" method="post">
                     <div class="form-user">
                         <div class="form-user__title">Đăng Nhập</div>
                         <div class="form-user__contain">
                             <div class="contain-input">
-                                <input type="text" class="input-element" placeholder="Email">
+                                <input type="text" class="input-element" name="username" placeholder="Tài khoản">
                                 <div class="input-notification"></div>
                             </div>
                             <div class="contain-input">
-                                <input type="password" class="input-element" placeholder="Mật khẩu">
+                                <input type="password" class="input-element" name="password" placeholder="Mật khẩu">
                                 <div class="input-notification"></div>
                             </div>
                             <button type="submit" class="btn">Đăng Nhập</button>
