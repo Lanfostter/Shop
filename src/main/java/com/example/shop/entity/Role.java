@@ -7,31 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 import lombok.Data;
 
 @Entity
+@Table(name = "role")
 @Data
-@Table(name = "User")
-public class UserEntity {
+public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "u_id")
+	@Column(name = "r_id")
 	private int id;
-	@Column(name = "u_name")
+	@Column(name = "r_name")
 	private String name;
-	@Column(name = "u_username")
-	private String username;
-	@Column(name = "u_password")
-	private String password;
-	@ManyToOne
-	@JoinColumn(name = "r_id")
-	private Role role;
-	@OneToMany(mappedBy = "userEntity")
-	private List<Cart> carts;
+	@OneToMany(mappedBy = "role")
+	private List<UserEntity> userEntity;
 }
