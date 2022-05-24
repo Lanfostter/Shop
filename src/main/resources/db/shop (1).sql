@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2022 at 05:44 PM
+-- Generation Time: May 25, 2022 at 01:43 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.4
 
@@ -101,9 +101,37 @@ CREATE TABLE `user` (
   `u_id` int(11) NOT NULL,
   `u_name` varchar(255) DEFAULT NULL,
   `u_password` varchar(255) DEFAULT NULL,
-  `u_role` varchar(255) DEFAULT NULL,
   `u_username` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`u_id`, `u_name`, `u_password`, `u_username`) VALUES
+(3, 'admin', '12345', 'admin'),
+(4, 'admin', '$2a$10$KoxHBgMYXgb7bsfdkCDvWuBj8FDP2X3Z4nQGo55MCDZApEfM7KEOu', 'admin'),
+(5, 'ducanh', '$2a$10$bNuVixPU8quAmKkJkdRCVe2mqKUlmQIl5BRW83fWiYQJNrwdLttR6', 'ducanh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_role`
+--
+
+CREATE TABLE `user_role` (
+  `u_id` int(11) NOT NULL,
+  `u_role` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_role`
+--
+
+INSERT INTO `user_role` (`u_id`, `u_role`) VALUES
+(3, 'ROLE_ADMIN'),
+(4, 'ROLE_ADMIN'),
+(5, 'ROLE_ADMIN');
 
 --
 -- Indexes for dumped tables
@@ -143,6 +171,12 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`u_id`);
 
 --
+-- Indexes for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD KEY `FKhqbsm81qe5n0g3phrjs0kucos` (`u_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -168,7 +202,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -192,6 +226,12 @@ ALTER TABLE `cartiteam`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `FKp999tsu8jkot8t7jqtsin7d7k` FOREIGN KEY (`c_id`) REFERENCES `category` (`c_id`);
+
+--
+-- Constraints for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD CONSTRAINT `FKhqbsm81qe5n0g3phrjs0kucos` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
