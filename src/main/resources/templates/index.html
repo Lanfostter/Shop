@@ -27,7 +27,7 @@
 			<div class="grid-wide">
 				<nav class="header__navbar hide-on-mobile-tablet">
 					<ul class="header__navbar--list">
-						<li th:text="#{Vào cửa hàng trên ứng dụng Vmart}"
+						<li text="Vào cửa hàng trên ứng dụng Vmart"
 							class="header__navbar--item header__navbar--item--hasqr header__navbar--item--seperate">
 							Vào cửa hàng trên ứng dụng Vmart<!-- header qr code -->
 							<div class="header__qr">
@@ -47,8 +47,8 @@
 
 						</li>
 						<li class="header__navbar--item"><span
-							class="header__navbar--title" th:text="#{Kết nối}"></span> <a href=""
-							class="header__navbar--icon--link"> <i
+							class="header__navbar--title">Kết nối</span> <a
+							href="" class="header__navbar--icon--link"> <i
 								class=" header__navbar--icon fab fa-facebook"></i>
 						</a> <a href="" class="header__navbar--icon--link"> <i
 								class=" header__navbar--icon fab fa-instagram"></i>
@@ -128,7 +128,8 @@
 
 
 						<li class="header__navbar--item header__navbar-user"><img
-							th:src="@{/img/download.jpg}" alt="" class="header__navbar-user-img">
+							th:src="@{/img/download.jpg}" alt=""
+							class="header__navbar-user-img"> 
 							<span class="header__navbar-user-name" sec:authentication="name"></span>
 
 							<ul class="header__navbar-user-menu">
@@ -138,14 +139,14 @@
 										của tôi</a></li>
 								<li class="header__navbar-user-item"><a th:href="@{/cart}">Đơn
 										mua</a></li>
-									<li sec:authorize="isAuthenticated()"
-										class="header__navbar-user-item header__navbar-user-item--logout">
-										<a th:href="@{/logout}">Đăng xuất</a>
-									</li>
-									<li sec:authorize="!isAuthenticated()"
-										class="header__navbar-user-item header__navbar-user-item--login">
-										<a th:href="@{/login}">Đăng nhập</a>
-									</li>
+								<li sec:authorize="isAuthenticated()"
+									class="header__navbar-user-item header__navbar-user-item--logout">
+									<a th:href="@{/logout}">Đăng xuất</a>
+								</li>
+								<li sec:authorize="!isAuthenticated()"
+									class="header__navbar-user-item header__navbar-user-item--login">
+									<a th:href="@{/login}">Đăng nhập</a>
+								</li>
 
 
 							</ul></li>
