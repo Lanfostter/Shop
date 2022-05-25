@@ -27,9 +27,9 @@
 			<div class="grid-wide">
 				<nav class="header__navbar hide-on-mobile-tablet">
 					<ul class="header__navbar--list">
-						<li
+						<li th:text="#{Vào cửa hàng trên ứng dụng Vmart}"
 							class="header__navbar--item header__navbar--item--hasqr header__navbar--item--seperate">
-							Vào cửa hàng trên ứng dụng Shoppe <!-- header qr code -->
+							Vào cửa hàng trên ứng dụng Vmart<!-- header qr code -->
 							<div class="header__qr">
 								<img src="source/img/QRcode.png" alt="QR code"
 									class="header__qr-img">
@@ -47,7 +47,7 @@
 
 						</li>
 						<li class="header__navbar--item"><span
-							class="header__navbar--title">Kết nối</span> <a href=""
+							class="header__navbar--title" th:text="#{Kết nối}"></span> <a href=""
 							class="header__navbar--icon--link"> <i
 								class=" header__navbar--icon fab fa-facebook"></i>
 						</a> <a href="" class="header__navbar--icon--link"> <i
@@ -129,7 +129,7 @@
 
 						<li class="header__navbar--item header__navbar-user"><img
 							src="source/img/cat.jpg" alt="" class="header__navbar-user-img">
-							<span class="header__navbar-user-name" th:text="${username}"></span>
+							<span class="header__navbar-user-name" sec:authentication="name"></span>
 
 							<ul class="header__navbar-user-menu">
 								<li class="header__navbar-user-item"><a href="">Tài

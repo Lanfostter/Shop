@@ -30,16 +30,13 @@ public class Security extends WebSecurityConfigurerAdapter {
 				// .hasAnyRole("ADMIN","SUBADMIN"
 				.hasAnyAuthority("ROLE_ADMIN")
 				// has authenticated
-				.antMatchers("/admin/**").authenticated().antMatchers("/cart/**").authenticated()
-				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/css/**", "/img/**", "/home")
+				.antMatchers("/admin/**").authenticated()
+				.antMatchers("/cart/**").authenticated()
+				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/css/**", "/img/**", "/home", "/api/**", "/msg/**")
 				.permitAll().anyRequest().permitAll().and().csrf().disable().formLogin().loginPage("/login")
 				.loginProcessingUrl("/login").failureUrl("/login?err=true").defaultSuccessUrl("/home", true).and()
 				.exceptionHandling().accessDeniedPage("/login")
 				.and().logout().logoutSuccessUrl("/home");
 	}
 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-
-	}
 }

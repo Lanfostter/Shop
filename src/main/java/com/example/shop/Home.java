@@ -104,11 +104,10 @@ public class Home {
 
 		if (principal instanceof UserDetails) {
 			String username = ((UserDetails) principal).getUsername();
-			model.addAttribute("username", username);
-		} else {
+		} 
+		else {
 			String username = principal.toString();
 		}
-		System.out.println(principal.toString());
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 		model.addAttribute("name", name == null ? "" : name);
