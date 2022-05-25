@@ -18,6 +18,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,7 +66,7 @@ public class Home {
 			@RequestParam(name = "size", required = false) Integer size,
 			@RequestParam(name = "sortBy", required = false) String sortBy) {
 		if (size == null)
-			size = 3;// Số lượng trang
+			size = 15;// Số lượng trang
 		if (page == null)
 			page = 0;// Trang hiện tại
 
@@ -97,7 +100,15 @@ public class Home {
 			model.addAttribute("list", pageProduct.toList());
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
 		}
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+		if (principal instanceof UserDetails) {
+			String username = ((UserDetails) principal).getUsername();
+			model.addAttribute("username", username);
+		} else {
+			String username = principal.toString();
+		}
+		System.out.println(principal.toString());
 		model.addAttribute("page", page);
 		model.addAttribute("size", size);
 		model.addAttribute("name", name == null ? "" : name);

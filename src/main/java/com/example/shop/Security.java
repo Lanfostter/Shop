@@ -26,17 +26,20 @@ public class Security extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/cart/**")
-				// .hasAnyRole("ADMIN","SUBADMIN")//ROLE_
-				.hasAnyAuthority("ROLE_ADMIN").antMatchers("/home").authenticated()
-				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll().anyRequest()
-				.permitAll().and().csrf().disable()
-
-				.formLogin().loginPage("/login").loginProcessingUrl("/login").failureUrl("/dang-nhap?err=true")
-				.defaultSuccessUrl("/home", true).and().exceptionHandling().accessDeniedPage("/login");
+		http.authorizeRequests().antMatchers("/admin/**")
+				// .hasAnyRole("ADMIN","SUBADMIN"
+				.hasAnyAuthority("ROLE_ADMIN")
+				// has authenticated
+				.antMatchers("/admin/**").authenticated().antMatchers("/cart/**").authenticated()
+				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/css/**", "/img/**", "/home")
+				.permitAll().anyRequest().permitAll().and().csrf().disable().formLogin().loginPage("/login")
+				.loginProcessingUrl("/login").failureUrl("/login?err=true").defaultSuccessUrl("/home", true).and()
+				.exceptionHandling().accessDeniedPage("/login")
+				.and().logout().logoutSuccessUrl("/home");
 	}
+
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		
+
 	}
 }

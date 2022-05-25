@@ -129,19 +129,25 @@
 
 						<li class="header__navbar--item header__navbar-user"><img
 							src="source/img/cat.jpg" alt="" class="header__navbar-user-img">
-							<span class="header__navbar-user-name">User</span>
+							<span class="header__navbar-user-name" th:text="${username}"></span>
 
 							<ul class="header__navbar-user-menu">
 								<li class="header__navbar-user-item"><a href="">Tài
 										khoản của tôi</a></li>
 								<li class="header__navbar-user-item"><a href="">Địa chỉ
 										của tôi</a></li>
-								<li class="header__navbar-user-item"><a href="">Đơn mua</a>
-								</li>
-								<li
-									class="header__navbar-user-item header__navbar-user-item--logout">
-									<a href="">Đăng xuất</a>
-								</li>
+								<li class="header__navbar-user-item"><a th:href="@{/cart}">Đơn
+										mua</a></li>
+									<li sec:authorize="isAuthenticated()"
+										class="header__navbar-user-item header__navbar-user-item--logout">
+										<a th:href="@{/logout}">Đăng xuất</a>
+									</li>
+									<li sec:authorize="!isAuthenticated()"
+										class="header__navbar-user-item header__navbar-user-item--login">
+										<a th:href="@{/login}">Đăng nhập</a>
+									</li>
+
+
 							</ul></li>
 					</ul>
 				</nav>
@@ -338,8 +344,8 @@
 										cả sản phẩm</a></li>
 								<li th:each="c: ${category}"
 									class="category-itme category-itme--cative"><a
-									th:href="@{'/home?name='}" class="category-item__link"
-									th:text="${c.name}"></a></li>
+									th:href="@{'/home?name='+${c.name}}"
+									class="category-item__link" th:text="${c.name}"></a></li>
 							</ul>
 						</nav>
 					</div>
