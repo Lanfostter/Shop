@@ -47,8 +47,8 @@
 
 						</li>
 						<li class="header__navbar--item"><span
-							class="header__navbar--title">Kết nối</span> <a
-							href="" class="header__navbar--icon--link"> <i
+							class="header__navbar--title">Kết nối</span> <a href=""
+							class="header__navbar--icon--link"> <i
 								class=" header__navbar--icon fab fa-facebook"></i>
 						</a> <a href="" class="header__navbar--icon--link"> <i
 								class=" header__navbar--icon fab fa-instagram"></i>
@@ -129,8 +129,8 @@
 
 						<li class="header__navbar--item header__navbar-user"><img
 							th:src="@{/img/download.jpg}" alt=""
-							class="header__navbar-user-img"> 
-							<span class="header__navbar-user-name" sec:authentication="name"></span>
+							class="header__navbar-user-img"> <span
+							class="header__navbar-user-name" sec:authentication="name"></span>
 
 							<ul class="header__navbar-user-menu">
 								<li class="header__navbar-user-item"><a href="">Tài
@@ -414,7 +414,7 @@
 						<!-- product-item -->
 						<div class="row">
 							<div th:each="p : ${list}" class="col l-2-4 m-4 s-6">
-								<a href="" class="home-product-item">
+								<a th:href="@{'/cartitem?id='+${p.id}}" class="home-product-item">
 									<div class="home-product-item__img"
 										th:style="'background-image: url('+@{'/download?image='+${p.img}}+')'">
 									</div>

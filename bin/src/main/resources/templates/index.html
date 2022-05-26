@@ -27,9 +27,9 @@
 			<div class="grid-wide">
 				<nav class="header__navbar hide-on-mobile-tablet">
 					<ul class="header__navbar--list">
-						<li
+						<li text="Vào cửa hàng trên ứng dụng Vmart"
 							class="header__navbar--item header__navbar--item--hasqr header__navbar--item--seperate">
-							Vào cửa hàng trên ứng dụng Shoppe <!-- header qr code -->
+							Vào cửa hàng trên ứng dụng Vmart<!-- header qr code -->
 							<div class="header__qr">
 								<img src="source/img/QRcode.png" alt="QR code"
 									class="header__qr-img">
@@ -47,8 +47,8 @@
 
 						</li>
 						<li class="header__navbar--item"><span
-							class="header__navbar--title">Kết nối</span> <a href=""
-							class="header__navbar--icon--link"> <i
+							class="header__navbar--title">Kết nối</span> <a
+							href="" class="header__navbar--icon--link"> <i
 								class=" header__navbar--icon fab fa-facebook"></i>
 						</a> <a href="" class="header__navbar--icon--link"> <i
 								class=" header__navbar--icon fab fa-instagram"></i>
@@ -128,20 +128,27 @@
 
 
 						<li class="header__navbar--item header__navbar-user"><img
-							src="source/img/cat.jpg" alt="" class="header__navbar-user-img">
-							<span class="header__navbar-user-name">User</span>
+							th:src="@{/img/download.jpg}" alt=""
+							class="header__navbar-user-img"> 
+							<span class="header__navbar-user-name" sec:authentication="name"></span>
 
 							<ul class="header__navbar-user-menu">
 								<li class="header__navbar-user-item"><a href="">Tài
 										khoản của tôi</a></li>
 								<li class="header__navbar-user-item"><a href="">Địa chỉ
 										của tôi</a></li>
-								<li class="header__navbar-user-item"><a href="">Đơn mua</a>
-								</li>
-								<li
+								<li class="header__navbar-user-item"><a th:href="@{/cart}">Đơn
+										mua</a></li>
+								<li sec:authorize="isAuthenticated()"
 									class="header__navbar-user-item header__navbar-user-item--logout">
-									<a href="">Đăng xuất</a>
+									<a th:href="@{/logout}">Đăng xuất</a>
 								</li>
+								<li sec:authorize="!isAuthenticated()"
+									class="header__navbar-user-item header__navbar-user-item--login">
+									<a th:href="@{/login}">Đăng nhập</a>
+								</li>
+
+
 							</ul></li>
 					</ul>
 				</nav>
@@ -338,8 +345,8 @@
 										cả sản phẩm</a></li>
 								<li th:each="c: ${category}"
 									class="category-itme category-itme--cative"><a
-									th:href="@{'/home?name='}" class="category-item__link"
-									th:text="${c.name}"></a></li>
+									th:href="@{'/home?name='+${c.name}}"
+									class="category-item__link" th:text="${c.name}"></a></li>
 							</ul>
 						</nav>
 					</div>
