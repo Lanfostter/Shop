@@ -414,7 +414,7 @@
 						<!-- product-item -->
 						<div class="row">
 							<div th:each="p : ${list}" class="col l-2-4 m-4 s-6">
-								<a th:href="@{'/cartitem?id='+${p.id}}" class="home-product-item">
+								<a th:href="@{'/cart/item?id='+${p.id}}" class="home-product-item">
 									<div class="home-product-item__img"
 										th:style="'background-image: url('+@{'/download?image='+${p.img}}+')'">
 									</div>

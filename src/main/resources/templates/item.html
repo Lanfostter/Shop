@@ -246,14 +246,26 @@
 			</div>
 		</header>
 
-		<div class="container">
+		<div class="container" th:each="pro : ${saleproduct}">
 			<div class="grid bg-gray">
-				<div class="grid__row mt-20" th:each="pro : ${saleproduct}">
+				<div class="grid__row mt-20">
 					<div class="grid__column-4">
 						<div class="review-product">
 							<div class="review-product__img"
 								th:style="'background-image: url('+@{'/download?image='+${pro.img}}+')'"></div>
 							<div class="review-product__list-img">
+								<div class="review-product__contain">
+									<div class="review-img"
+										style="background-image: url(https://cf.shopee.vn/file/ba0b62924bee14e0dd92aab1bbf91173_tn)"></div>
+								</div>
+								<div class="review-product__contain">
+									<div class="review-img"
+										style="background-image: url(https://cf.shopee.vn/file/905f7d5981a51686d5e18768b93c2871_tn)"></div>
+								</div>
+								<div class="review-product__contain">
+									<div class="review-img"
+										style="background-image: url(https://cf.shopee.vn/file/1b4d1b48b90c449bafa42a24769e46b5_tn)"></div>
+								</div>
 							</div>
 							<div class="review-product__action">
 								<div class="grid__row">
@@ -301,7 +313,7 @@
 									class="evaluate-sold">994 Đã bán</span>
 							</div>
 							<div class="info-product__price">
-								<span class="price-old">300.800đ</span> <span class="price-new" th:text="${pro.price} + VND"></span>
+								<span class="price-old">300.800đ</span> <span class="price-new">159.300đ</span>
 								<span class="price-lable">30% GIẢM</span>
 							</div>
 
@@ -367,7 +379,7 @@
 									<i class="fas fa-cart-plus icon-buy"></i> <span
 										class="title-buy">Thêm Vào Giỏi Hàng</span>
 								</button>
-								<a class="btn-buy btn-buy__red" href="./cart.html"> <span
+								<a class="btn-buy btn-buy__red" th:href="@{/cart/addtocart}"> <span
 									class="title-buy_w">Mua Ngay</span>
 								</a>
 							</div>
@@ -725,6 +737,4 @@
 </body>
 
 </html>
-
-
 
