@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.shop.entity.Cart;
-import com.example.shop.entity.CartIteam;
+import com.example.shop.entity.CartItem;
 import com.example.shop.entity.ProductEntity;
 import com.example.shop.repository.CartItemRepository;
 import com.example.shop.repository.CartRepository;
@@ -39,12 +39,47 @@ public class CartItemController {
 	}
 
 	@GetMapping("/addtocart")
-	public String addToCart(Principal principal) {
-		Cart cart = new Cart();
-		cart.setUserEntity(userRepository.findByUsername(principal.getName()));
-		cart.setBuyDate(new Date());
-		System.out.println(cart.getBuyDate());
-		cartRepository.save(cart);
+	public String addToCart(@RequestParam("id") int id, Model model, Principal principal) {
+
+		model.addAttribute("saleproduct", productRepository.findById(id).get());
+		model.addAttribute("cart", cartRepository.findAll());
+		if (cartRepository.findByUserEntity(principal.getName()) == null) {
+			Cart cart = new Cart();
+			cart.setUserEntity(userRepository.findByUsername(principal.getName()));
+			cart.setBuyDate(new Date());
+			cartRepository.save(cart);
+			CartItem cartItem = new CartItem();
+			cartItem.setQuantity(1);
+			cartItem.setProductEntity(productRepository.findById(id).get());
+			cartItem.setCart(cart);
+			cartItemRepository.save(cartItem);
+		} else {
+			Cart cart = cartRepository.findByUserEntity(principal.getName());
+			if(cartItemRepository.findByProId(id, cart.getId()) != null)
+			{
+				CartItem cartItem = cartItemRepository.findByProId(id, cart.getId());
+				cartItem.setQuantity(cartItem.getQuantity() + 1);
+				cartItemRepository.save(cartItem);
+			}
+			else {
+				CartItem cartItem = new CartItem();
+				cartItem.setProductEntity(productRepository.findById(id).get());
+				cartItem.setCart(cart);
+				cartItemRepository.save(cartItem);
+			}
+		}
+		return "redirect:/cart/listcartitem";
+	}
+
+	@GetMapping("/listcartitem")
+	public String listCartItem(Model model, Principal principal) {
+		model.addAttribute("cart", cartRepository.findByUserEntity(principal.getName()));
 		return "cart";
+	}
+
+	@GetMapping("/delete")
+	public String deleteItem(@RequestParam("id") int id) {
+		cartItemRepository.deleteById(id);
+		return "redirect:/cart/listcartitem";
 	}
 }

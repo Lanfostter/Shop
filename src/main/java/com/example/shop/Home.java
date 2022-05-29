@@ -3,6 +3,7 @@ package com.example.shop;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.shop.entity.Cart;
+import com.example.shop.entity.CartItem;
 import com.example.shop.entity.ProductEntity;
+import com.example.shop.repository.CartItemRepository;
+import com.example.shop.repository.CartRepository;
 import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
 
@@ -42,29 +47,16 @@ public class Home {
 	@Autowired
 	CategoryRepository categoryRepository;
 
-	@GetMapping(value = "/download")
-	public void download(HttpServletResponse response, @RequestParam("image") String image) {
-		final String uploadFolder = "C:\\Users\\fostt\\eclipse-workspace\\shop\\src\\main\\resources\\static\\img\\";// tao
-		// thu
-		// muc
-		// luu
-		// anh
-		File file = new File(uploadFolder + File.separator + image);
-		if (file.exists()) {
-			try {
-				Files.copy(file.toPath(), response.getOutputStream());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
+	@Autowired
+	CartRepository cartRepository;
+	@Autowired
+	CartItemRepository cartItemRepository;
 	@GetMapping("/home")
-	public String search(Model model, @RequestParam(name = "name", required = false) String name,
+	public String home(Model model, @RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "id", required = false) Integer id,
 			@RequestParam(name = "page", required = false) Integer page,
 			@RequestParam(name = "size", required = false) Integer size,
-			@RequestParam(name = "sortBy", required = false) String sortBy) {
+			@RequestParam(name = "sortBy", required = false) String sortBy, Principal principal) {
 		if (size == null)
 			size = 15;// Số lượng trang
 		if (page == null)
@@ -87,12 +79,9 @@ public class Home {
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
 		} else if (id != null) {
 			ProductEntity productEntity = productRepository.findById(id).orElse(null);
-			if (productEntity != null) {
 				model.addAttribute("list", Arrays.asList(productEntity));
-			} else
 				// log
 				logger.info("Id not found");
-
 			model.addAttribute("totalPage", 0);
 		} else {
 			Page<ProductEntity> pageProduct = productRepository.findAll(pageable);
@@ -106,6 +95,33 @@ public class Home {
 		model.addAttribute("id", id == null ? "" : id);
 		model.addAttribute("sortBy", sortBy == null ? "" : sortBy);
 		model.addAttribute("category", categoryRepository.findAll());
+		try {
+			Cart cart = new Cart();
+			cart = cartRepository.findByUserEntity(principal.getName());
+			model.addAttribute("cart", cart);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		return "index";
 	}
+
+	@GetMapping(value = "/download")
+	public void download(HttpServletResponse response, @RequestParam("image") String image) {
+		final String uploadFolder = "C:\\Users\\fostt\\eclipse-workspace\\shop\\src\\main\\resources\\static\\img\\";// tao
+		// thu
+		// muc
+		// luu
+		// anh
+		File file = new File(uploadFolder + File.separator + image);
+		if (file.exists()) {
+			try {
+				Files.copy(file.toPath(), response.getOutputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

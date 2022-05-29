@@ -34,5 +34,5 @@ public class ProductEntity {
 	@JoinColumn(name = "c_id")
 	private CategoryEntity categoryEntity;
 	@OneToMany(mappedBy = "productEntity")
-	List<CartIteam> cartIteams;
+	List<CartItem> cartIteams;
 }

@@ -137,8 +137,8 @@
 										khoản của tôi</a></li>
 								<li class="header__navbar-user-item"><a href="">Địa chỉ
 										của tôi</a></li>
-								<li class="header__navbar-user-item"><a th:href="@{/cart}">Đơn
-										mua</a></li>
+								<li class="header__navbar-user-item"><a
+									th:href="@{/cart/listcartitem}">Đơn mua</a></li>
 								<li sec:authorize="isAuthenticated()"
 									class="header__navbar-user-item header__navbar-user-item--logout">
 									<a th:href="@{/logout}">Đăng xuất</a>
@@ -251,16 +251,16 @@
 								<!-- cart -->
 								<h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
 								<ul class="header__cart-list-item">
-									<li class="header__cart-item"><img
-										class="header__cart-img" src="source/img/item-2.jpg" alt="">
+									<li class="header__cart-item" th:each="c : ${cart.cartIteams}" sec:authorize="isAuthenticated()"><img
+										class="header__cart-img" th:src="@{'/download?image='+${c.productEntity.img}}" alt="">
 										<div class="header__cart-item-info">
 											<div class="header__cart-item-head">
-												<h5 class="header__cart-item-name">Apple iPhone 12 Pro
-													Max 256GB</h5>
+												<h5 class="header__cart-item-name"
+													th:text="${c.productEntity.name}"></h5>
 												<div class="header__cart-item-price-wrap">
-													<span class="header__cart-item-price">25.300.000đ</span> <span
+													<span class="header__cart-item-price" th:text="${c.productEntity.price}"></span> <span
 														class="header__cart-item-multi">x</span> <span
-														class="header__cart-item-mun">1</span>
+														class="header__cart-item-mun" th:text="${c.quantity}"></span>
 												</div>
 											</div>
 											<div class="header__cart-item-body">
@@ -270,48 +270,9 @@
 												</span>
 											</div>
 										</div></li>
-									<li class="header__cart-item"><img
-										class="header__cart-img" src="source/img/item.jpg" alt="">
-										<div class="header__cart-item-info">
-											<div class="header__cart-item-head">
-												<h5 class="header__cart-item-name">Macbook pro 13inch
-													2020 Macbook pro 13inch 2020Macbook pro 13inch 2020Macbook
-													pro 13inch 2020Macbook pro 13inch 2020</h5>
-												<div class="header__cart-item-price-wrap">
-													<span class="header__cart-item-price">32.300.000đ</span> <span
-														class="header__cart-item-multi">x</span> <span
-														class="header__cart-item-mun">1</span>
-												</div>
-											</div>
-											<div class="header__cart-item-body">
-												<span class="header__cart-item-description">Phân
-													loại: Bạc</span> <span class="header__cart-item-remove"> <i
-													class="fas fa-times"></i>
-												</span>
-											</div>
-										</div></li>
-									<li class="header__cart-item"><img
-										class="header__cart-img" src="source/img/item-11.jpg" alt="">
-										<div class="header__cart-item-info">
-											<div class="header__cart-item-head">
-												<h5 class="header__cart-item-name">iMac Pro 2020 27
-													inch 5K – (Core Intel Xeon W/ Vega 56)</h5>
-												<div class="header__cart-item-price-wrap">
-													<span class="header__cart-item-price">109.300.000đ</span> <span
-														class="header__cart-item-multi">x</span> <span
-														class="header__cart-item-mun">1</span>
-												</div>
-											</div>
-											<div class="header__cart-item-body">
-												<span class="header__cart-item-description">Phân
-													loại: Dark space</span> <span class="header__cart-item-remove">
-													<i class="fas fa-times"></i>
-												</span>
-											</div>
-										</div></li>
 								</ul>
 
-								<a href="#" class="header__cart-view-cart btn btn--primary">Xem
+								<a th:href="@{/cart/listcartitem}" class="header__cart-view-cart btn btn--primary">Xem
 									giỏi hàng</a>
 							</div>
 						</div>
@@ -414,7 +375,8 @@
 						<!-- product-item -->
 						<div class="row">
 							<div th:each="p : ${list}" class="col l-2-4 m-4 s-6">
-								<a th:href="@{'/cart/item?id='+${p.id}}" class="home-product-item">
+								<a th:href="@{'/cart/item?id='+${p.id}}"
+									class="home-product-item">
 									<div class="home-product-item__img"
 										th:style="'background-image: url('+@{'/download?image='+${p.img}}+')'">
 									</div>

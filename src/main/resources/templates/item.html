@@ -9,6 +9,7 @@
 <link rel="stylesheet"
 	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}">
 <link rel="stylesheet" th:href="@{/css/item.css}">
+<script type="text/javascript" th:src="@{js/index}"></script>
 <title></title>
 </head>
 
@@ -248,6 +249,7 @@
 
 		<div class="container" th:each="pro : ${saleproduct}">
 			<div class="grid bg-gray">
+
 				<div class="grid__row mt-20">
 					<div class="grid__column-4">
 						<div class="review-product">
@@ -313,8 +315,9 @@
 									class="evaluate-sold">994 Đã bán</span>
 							</div>
 							<div class="info-product__price">
-								<span class="price-old">300.800đ</span> <span class="price-new">159.300đ</span>
-								<span class="price-lable">30% GIẢM</span>
+								<span class="price-old">300.800đ</span> <span class="price-new"
+									th:text="${pro.price}"></span> <span class="price-lable">30%
+									GIẢM</span>
 							</div>
 
 							<div class="info-product__shipping">
@@ -360,17 +363,17 @@
 										onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;"
 										type='button' value='-' /> <input
 										style="background-color: white; width: 40px; height: 25px; border: 1px rgb(160, 158, 158) solid; text-align: center;"
-										id='quantity' min='1' name='quantity' type='text' value='1' />
+										id='proquantity' min='1' name='quantity' type='text' value='1' />
 									<input
 										style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid; -webkit-border-top-right-radius: 3px 3px; -webkit-border-bottom-right-radius: 3px 3px;"
 										onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;"
 										type='button' value='+' />
+
 								</div>
 								<div class="product-rest">
 									<span class="qualityJS">652</span> sản phẩm có sản
 								</div>
 							</div>
-
 							<div class="alert-limit">Đã đạt đến số lượng mua tối đa cho
 								phép của sản phẩm này.</div>
 
@@ -379,7 +382,8 @@
 									<i class="fas fa-cart-plus icon-buy"></i> <span
 										class="title-buy">Thêm Vào Giỏi Hàng</span>
 								</button>
-								<a class="btn-buy btn-buy__red" th:href="@{/cart/addtocart}"> <span
+								<a class="btn-buy btn-buy__red"
+									th:href="@{'/cart/addtocart?id='+${pro.id}}"> <span
 									class="title-buy_w">Mua Ngay</span>
 								</a>
 							</div>
@@ -450,6 +454,7 @@
 									vài giờ</span>
 							</div>
 						</div>
+						
 						<div class="achievements-shop__ct">
 							<div class="achievements-content">
 								Tham Gia<span style="color: red; margin-left: 6px;">5 năm

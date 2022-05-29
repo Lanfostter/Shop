@@ -13,7 +13,6 @@ public class LoginController {
 		if (error == null) {
 			request.setAttribute("e", error);
 		}
-
 		return "login";
 	}
 }

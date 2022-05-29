@@ -29,5 +29,5 @@ public class Cart {
 	@JoinColumn(name = "u_id")
 	private UserEntity userEntity;
 	@OneToMany(mappedBy = "cart")
-	private List<CartIteam> cartIteams;
+	private List<CartItem> cartIteams;
 }
