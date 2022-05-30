@@ -51,12 +51,15 @@ public class Home {
 	CartRepository cartRepository;
 	@Autowired
 	CartItemRepository cartItemRepository;
+
+	// trang chủ, phân trang, tìm kiếm, sắp xếp
 	@GetMapping("/home")
 	public String home(Model model, @RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "id", required = false) Integer id,
 			@RequestParam(name = "page", required = false) Integer page,
 			@RequestParam(name = "size", required = false) Integer size,
-			@RequestParam(name = "sortBy", required = false) String sortBy, Principal principal) {
+			@RequestParam(name = "sortBy", required = false) String sortBy,
+			@RequestParam(name = "cat", required = false) String cat, Principal principal) {
 		if (size == null)
 			size = 15;// Số lượng trang
 		if (page == null)
@@ -79,10 +82,15 @@ public class Home {
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
 		} else if (id != null) {
 			ProductEntity productEntity = productRepository.findById(id).orElse(null);
-				model.addAttribute("list", Arrays.asList(productEntity));
-				// log
-				logger.info("Id not found");
+			model.addAttribute("list", Arrays.asList(productEntity));
+			// log
+			logger.info("Id not found");
 			model.addAttribute("totalPage", 0);
+		} else if (cat != null && !cat.isEmpty()) {
+			Page<ProductEntity> pageProduct = productRepository.searchByCategory("%" + cat + "%", pageable);
+
+			model.addAttribute("list", pageProduct.toList());
+			model.addAttribute("totalPage", pageProduct.getTotalPages());
 		} else {
 			Page<ProductEntity> pageProduct = productRepository.findAll(pageable);
 
@@ -101,12 +109,12 @@ public class Home {
 			model.addAttribute("cart", cart);
 
 		} catch (Exception e) {
-			System.out.println(e);
 		}
-		
+
 		return "index";
 	}
 
+	// tải ảnh
 	@GetMapping(value = "/download")
 	public void download(HttpServletResponse response, @RequestParam("image") String image) {
 		final String uploadFolder = "C:\\Users\\fostt\\eclipse-workspace\\shop\\src\\main\\resources\\static\\img\\";// tao

@@ -18,20 +18,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class Security extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService;
-
+	
+	// giải mã hóa password
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-
+	// phân quyền
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/admin/**")
 				// .hasAnyRole("ADMIN","SUBADMIN"
 				.hasAnyAuthority("ROLE_ADMIN")
 				// has authenticated
-				.antMatchers("/admin/**").authenticated()
-				.antMatchers("/cart/**","/cartitem/**").authenticated()
+				.antMatchers("/admin/**","/cart/**","/cartitem/**").authenticated()
 				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/css/**", "/img/**", "/home", "/api/**", "/msg/**")
 				.permitAll().anyRequest().permitAll().and().csrf().disable().formLogin().loginPage("/login")
 				.loginProcessingUrl("/login").failureUrl("/login?err=true").defaultSuccessUrl("/home", true).and()

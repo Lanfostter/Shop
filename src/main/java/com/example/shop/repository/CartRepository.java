@@ -1,11 +1,14 @@
 package com.example.shop.repository;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.example.shop.entity.Cart;
+import com.example.shop.entity.ProductEntity;
 
 public interface CartRepository extends JpaRepository<Cart, Integer>{
 	@Query("SELECT c FROM Cart c JOIN c.userEntity u "

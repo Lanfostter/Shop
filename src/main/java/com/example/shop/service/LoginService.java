@@ -17,7 +17,7 @@ import com.example.shop.repository.UserRepository;
 public class LoginService implements UserDetailsService {
 	@Autowired
 	UserRepository userRepository;
-
+	// xác minh tài khoản trả về người dùng hiện tại
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserEntity userEntity = userRepository.findByUsername(username);
