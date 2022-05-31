@@ -59,7 +59,8 @@ public class CategoryControllerApi {
 	}
 
 	@PutMapping("/update")
-	public void update(@RequestParam("imagefile") MultipartFile imagefile,@RequestBody @Validated CategoryEntity categoryEntity) {
+	public void update(@RequestParam("imagefile") MultipartFile imagefile,
+			@RequestBody @Validated CategoryEntity categoryEntity) {
 		CategoryEntity oldOne = categoryRepository.getById(categoryEntity.getId());
 		String originalFilename = imagefile.getOriginalFilename();
 		int lastIndex = originalFilename.lastIndexOf(".");

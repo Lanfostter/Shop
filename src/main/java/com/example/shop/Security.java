@@ -32,6 +32,7 @@ public class Security extends WebSecurityConfigurerAdapter {
 				.hasAnyAuthority("ROLE_ADMIN")
 				// has authenticated
 				.antMatchers("/admin/**","/cart/**","/cartitem/**").authenticated()
+				// everyone can join
 				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/css/**", "/img/**", "/home", "/api/**", "/msg/**")
 				.permitAll().anyRequest().permitAll().and().csrf().disable().formLogin().loginPage("/login")
 				.loginProcessingUrl("/login").failureUrl("/login?err=true").defaultSuccessUrl("/home", true).and()

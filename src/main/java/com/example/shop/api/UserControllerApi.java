@@ -58,8 +58,9 @@ public class UserControllerApi {
 		oldOne.setRoles(userEntity.getRoles());
 		userRepository.save(oldOne);
 	}
+
 	@GetMapping("search")
-	public UserEntity getUserEntity(@RequestParam("name") String name ) {
+	public UserEntity getUserEntity(@RequestParam("name") String name) {
 		return userRepository.findByUsername(name);
 	}
 }

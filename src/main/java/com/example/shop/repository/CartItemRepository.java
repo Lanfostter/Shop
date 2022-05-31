@@ -10,4 +10,6 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 	@Query("SELECT ci FROM CartItem ci JOIN ci.productEntity p JOIN ci.cart c "
 			+ "WHERE p.id = :pid" + " AND c.id = :cid")
 	CartItem findByProId(@Param("pid") int pid , @Param("cid") int cid);
+	@Query("SELECT SUM(ci.quantity) FROM CartItem ci JOIN ci.cart c  JOIN c.userEntity u WHERE u.username = :uname")
+	Integer numberItemCart(@Param("uname") String uname);
 }

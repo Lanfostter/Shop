@@ -40,7 +40,7 @@ public class CartItemController {
 
 	@GetMapping("/addtocart")
 	public String addToCart(@RequestParam("id") int id, Model model, Principal principal) {
-
+		
 		model.addAttribute("saleproduct", productRepository.findById(id).get());
 		model.addAttribute("cart", cartRepository.findAll());
 		if (cartRepository.findByUserEntity(principal.getName()) == null) {
@@ -64,6 +64,7 @@ public class CartItemController {
 			else {
 				CartItem cartItem = new CartItem();
 				cartItem.setProductEntity(productRepository.findById(id).get());
+				cartItem.setQuantity(1);
 				cartItem.setCart(cart);
 				cartItemRepository.save(cartItem);
 			}

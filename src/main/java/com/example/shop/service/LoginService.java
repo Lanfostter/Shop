@@ -23,7 +23,6 @@ public class LoginService implements UserDetailsService {
 		UserEntity userEntity = userRepository.findByUsername(username);
 		if (userEntity == null) {
 			throw new UsernameNotFoundException("not found");
-			
 		}
 		List<SimpleGrantedAuthority> list = new ArrayList<SimpleGrantedAuthority>();
 		for (String role : userEntity.getRoles()) {
