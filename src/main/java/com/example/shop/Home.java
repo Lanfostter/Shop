@@ -106,9 +106,9 @@ public class Home {
 		try {
 			Cart cart = new Cart();
 			cart = cartRepository.findByUserEntity(principal.getName());
+
 			model.addAttribute("cart", cart);
 			model.addAttribute("totalitem", cartItemRepository.numberItemCart(principal.getName()));
-
 
 		} catch (Exception e) {
 		}

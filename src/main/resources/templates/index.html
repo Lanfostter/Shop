@@ -218,17 +218,6 @@
 									class="header__search-input"
 									placeholder="Nhập để tìm kiếm sản phẩm">
 
-								<!-- Search history -->
-								<div class="header__search-history">
-									<h3 class="header__search-history-heading">Lịch sử tìm
-										kiếm</h3>
-									<ul class="header__search-history-list">
-										<li class="header__search-history-item"><a href="">Điện
-												thoại iphone 12</a></li>
-										<li class="header__search-history-item"><a href="">Điện
-												thoại iphone 11</a></li>
-									</ul>
-								</div>
 							</div>
 							<button class="header__search-btn">
 								<i class="header__search-btn-icon fas fa-search"></i>
@@ -251,8 +240,9 @@
 								<!-- cart -->
 								<h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
 								<ul class="header__cart-list-item"
-									sec:authorize="isAuthenticated()"  th:each="c : ${cart.cartIteams}">
-									<li class="header__cart-item" th:if="${c}"><img
+									sec:authorize="isAuthenticated()"
+									 th:if="${cart}">
+									<li class="header__cart-item" th:each="c : ${cart.cartIteams}"><img
 										class="header__cart-img"
 										th:src="@{'/download?image='+${c.productEntity.img}}" alt="">
 										<div class="header__cart-item-info">
@@ -310,8 +300,8 @@
 										cả sản phẩm</a></li>
 								<li th:each="c: ${category}"
 									class="category-itme category-itme--cative"><a
-									th:href="@{'/home?cat='+${c.name}}"
-									class="category-item__link" th:text="${c.name}"></a></li>
+									th:href="@{'/home?cat='+${c.name}}" class="category-item__link"
+									th:text="${c.name}"></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -339,7 +329,7 @@
 
 							<div class="home-filter__paginate">
 								<span class="home-filter__page-num"> <span
-									class="home-filter__page-current">1</span>/<span>14</span>
+									class="home-filter__page-current" th:each="i: ${#numbers.sequence(0, totalPage-1)}" th:text="${i +1}"></span>/<span th:text="${totalPage}"></span>
 								</span>
 								<div class="home-filter__page-control">
 									<!-- active: home-filter__page-icon--active -->

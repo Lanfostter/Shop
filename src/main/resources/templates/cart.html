@@ -319,23 +319,28 @@
 								<div class="grid__colum-5">
 									<div class="container-title">
 										<div class="products-contain1">
-											<div class="price-old">300.800đ</div>
-											<div class="price-new" th:text="${ci.productEntity.price}+đ"></div>
+											<div class="price-old" th:text="${ci.productEntity.price}+đ"></div>
+											<div class="price-new" th:text="${ci.productEntity.price*43/100}+đ"></div>
 										</div>
-										<input
-											style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid; -webkit-border-top-left-radius: 3px 3px; -webkit-border-bottom-left-radius: 3px 3px;"
-											th:onclick="'var result = document.getElementById('+${ci.id}+'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;'"
-											type='button' value='-' /> <input
-											style="background-color: white; width: 40px; height: 25px; border: 1px rgb(160, 158, 158) solid; text-align: center;"
-											th:id="${ci.id}" min='1' name='quantity' type='text'
-											th:value="${ci.quantity}" /> <input
-											style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid; -webkit-border-top-right-radius: 3px 3px; -webkit-border-bottom-right-radius: 3px 3px;"
-											th:onclick="'var result = document.getElementById('+${ci.id}+'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;'"
-											type='button' value='+' />
-
+										<form th:action="@{/cart/updatecartitem}"
+											th:object="${cartitem}" method="post">
+											<input th:name="id" th:value="${ci.id}" hidden="true">
+											<input th:name="cart.id" th:value="${ci.cart.id}"
+												hidden="true"> <input th:name="productEntity.id"
+												th:value="${ci.productEntity.id}" hidden="true"> <input
+												style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid; -webkit-border-top-left-radius: 3px 3px; -webkit-border-bottom-left-radius: 3px 3px;"
+												th:onclick="'var result = document.getElementById('+${ci.id}+'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return true'"
+												type="submit" value='-' /> <input
+												style="background-color: white; width: 40px; height: 25px; border: 1px rgb(160, 158, 158) solid; text-align: center;"
+												th:id="${ci.id}" min='1' th:name="quantity" type='text'
+												th:value="${ci.quantity}" /> <input
+												style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid; -webkit-border-top-right-radius: 3px 3px; -webkit-border-bottom-right-radius: 3px 3px;"
+												th:onclick="'var result = document.getElementById('+${ci.id}+'); var qty = result.value; if( !isNaN(qty)) result.value++;return true;'"
+												type="submit" value='+' />
+										</form>
 										<div class="products-contain1" style="margin-left: 60px;">
 											<div class="price"
-												th:text="${ci.quantity * ci.productEntity.price}"></div>
+												th:text="${ci.quantity * (ci.productEntity.price * 43 / 100)}+'đ'"></div>
 										</div>
 
 										<div class="products-contain1">
@@ -394,7 +399,7 @@
 				<div class="pay-products">
 					<span class="pay-text">Tổng thanh toán (<span
 						class="quality-js">1</span> Sản phẩm)
-					</span> <span class="pay-price"><span class="pay-price--js">637.200</span>đ</span>
+					</span> <span class="pay-price"><span class="pay-price--js" th:text="${totalprice * 43/100}"></span>đ</span>
 					<button class="pay-btn">Mua Hàng</button>
 				</div>
 

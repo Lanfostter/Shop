@@ -2,6 +2,7 @@ package com.example.shop.controller;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class CartItemController {
 
 	@GetMapping("/addtocart")
 	public String addToCart(@RequestParam("id") int id, Model model, Principal principal) {
-		
+
 		model.addAttribute("saleproduct", productRepository.findById(id).get());
 		model.addAttribute("cart", cartRepository.findAll());
 		if (cartRepository.findByUserEntity(principal.getName()) == null) {
@@ -55,13 +56,11 @@ public class CartItemController {
 			cartItemRepository.save(cartItem);
 		} else {
 			Cart cart = cartRepository.findByUserEntity(principal.getName());
-			if(cartItemRepository.findByProId(id, cart.getId()) != null)
-			{
+			if (cartItemRepository.findByProId(id, cart.getId()) != null) {
 				CartItem cartItem = cartItemRepository.findByProId(id, cart.getId());
 				cartItem.setQuantity(cartItem.getQuantity() + 1);
 				cartItemRepository.save(cartItem);
-			}
-			else {
+			} else {
 				CartItem cartItem = new CartItem();
 				cartItem.setProductEntity(productRepository.findById(id).get());
 				cartItem.setQuantity(1);
@@ -74,7 +73,17 @@ public class CartItemController {
 
 	@GetMapping("/listcartitem")
 	public String listCartItem(Model model, Principal principal) {
-		model.addAttribute("cart", cartRepository.findByUserEntity(principal.getName()));
+		if (cartRepository.findByUserEntity(principal.getName()) != null) {
+			Cart cart = cartRepository.findByUserEntity(principal.getName());
+			model.addAttribute("cart", cart);
+			model.addAttribute("cartitem", cartItemRepository.findById(cart.getUserEntity().getId()));
+			int double1 = 0;
+			for(CartItem cartItem : cartRepository.findByUserEntity(principal.getName()).getCartIteams()) {
+				 double1 += (cartItem.getQuantity() * cartItem.getProductEntity().getPrice());
+			}
+			model.addAttribute("totalprice", double1);
+
+		}
 		return "cart";
 	}
 
@@ -82,5 +91,12 @@ public class CartItemController {
 	public String deleteItem(@RequestParam("id") int id) {
 		cartItemRepository.deleteById(id);
 		return "redirect:/cart/listcartitem";
+	}
+
+	@PostMapping("/updatecartitem")
+	public String updateCartItem(@ModelAttribute("cartitem") CartItem cartItem, Principal principal) {
+		cartItemRepository.save(cartItem);
+		return "redirect:/cart/listcartitem";
+
 	}
 }
