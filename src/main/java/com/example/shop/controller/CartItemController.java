@@ -1,8 +1,8 @@
 package com.example.shop.controller;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.shop.entity.Cart;
 import com.example.shop.entity.CartItem;
-import com.example.shop.entity.ProductEntity;
 import com.example.shop.repository.CartItemRepository;
 import com.example.shop.repository.CartRepository;
 import com.example.shop.repository.ProductRepository;
@@ -48,6 +47,7 @@ public class CartItemController {
 			Cart cart = new Cart();
 			cart.setUserEntity(userRepository.findByUsername(principal.getName()));
 			cart.setBuyDate(new Date());
+			cart.setPayup(false);
 			cartRepository.save(cart);
 			CartItem cartItem = new CartItem();
 			cartItem.setQuantity(1);
@@ -73,13 +73,13 @@ public class CartItemController {
 
 	@GetMapping("/listcartitem")
 	public String listCartItem(Model model, Principal principal) {
-		if (cartRepository.findByUserEntity(principal.getName()) != null) {
+		if (cartRepository.findByUserEntityNotPayUp(principal.getName()) != null) {
 			Cart cart = cartRepository.findByUserEntity(principal.getName());
 			model.addAttribute("cart", cart);
 			model.addAttribute("cartitem", cartItemRepository.findById(cart.getUserEntity().getId()));
 			int double1 = 0;
-			for(CartItem cartItem : cartRepository.findByUserEntity(principal.getName()).getCartIteams()) {
-				 double1 += (cartItem.getQuantity() * cartItem.getProductEntity().getPrice());
+			for (CartItem cartItem : cartRepository.findByUserEntity(principal.getName()).getCartIteams()) {
+				double1 += (cartItem.getQuantity() * cartItem.getProductEntity().getPrice());
 			}
 			model.addAttribute("totalprice", double1);
 
@@ -98,5 +98,12 @@ public class CartItemController {
 		cartItemRepository.save(cartItem);
 		return "redirect:/cart/listcartitem";
 
+	}
+
+	@PostMapping("/payup")
+	public String payup(@ModelAttribute("cart") Cart cart) {
+		cart.setBuyDate(new Date());
+		cartRepository.save(cart);
+		return "redirect:/cart/listcartitem";
 	}
 }

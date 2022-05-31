@@ -252,21 +252,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<div class="grid">
 				<div class="cart-shop mt-20">
 					<div class="grid__row">
@@ -284,16 +269,6 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
 				<div class="root">
 					<div class="cart-buy" th:each="c : ${cart}">
 						<div class="cart-buy__products" th:each="ci : ${c.cartIteams}">
@@ -320,7 +295,8 @@
 									<div class="container-title">
 										<div class="products-contain1">
 											<div class="price-old" th:text="${ci.productEntity.price}+đ"></div>
-											<div class="price-new" th:text="${ci.productEntity.price*43/100}+đ"></div>
+											<div class="price-new"
+												th:text="${ci.productEntity.price*43/100}+đ"></div>
 										</div>
 										<form th:action="@{/cart/updatecartitem}"
 											th:object="${cartitem}" method="post">
@@ -358,22 +334,6 @@
 						Voucher giảm đến ₫20k</span> <a href="#" class="voucher-text--link">Xem
 						thêm voucher</a>
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				<div class="voucher">
 					<img src="oto.png" alt=""> <span class="voucher-text">Giảm
 						₫25.000 phí vận chuyển đơn tối thiểu ₫50.000</span> <a href="#"
@@ -396,11 +356,18 @@
 					</select> <span class="pay-price">0đ</span>
 				</div>
 
-				<div class="pay-products">
+				<div class="pay-products" th:each="c : ${cart}">
 					<span class="pay-text">Tổng thanh toán (<span
 						class="quality-js">1</span> Sản phẩm)
-					</span> <span class="pay-price"><span class="pay-price--js" th:text="${totalprice * 43/100}"></span>đ</span>
-					<button class="pay-btn">Mua Hàng</button>
+					</span> <span class="pay-price"><span class="pay-price--js"
+						th:text="${totalprice * 43/100}"></span>đ</span>
+					<form th:action="@{/cart/payup}" th:object="${cart}" method="post">
+						<input th:name="id" th:value="${c.id}" hidden="true"> <input
+							th:name="userEntity.id" th:value="${c.userEntity.id}" hidden="true">
+							<input
+							th:name="payup" value="true" hidden="true">
+						<button class="pay-btn" type="submit">Mua Hàng</button>
+					</form>
 				</div>
 
 			</div>
