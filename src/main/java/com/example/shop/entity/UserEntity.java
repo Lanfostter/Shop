@@ -27,6 +27,8 @@ public class UserEntity {
 	private int id;
 	@Column(name = "u_name")
 	private String name;
+	@Column(name = "u_email")
+	private String email;
 	@Column(name = "u_username")
 	private String username;
 	@Column(name = "u_password")

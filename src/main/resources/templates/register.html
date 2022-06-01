@@ -55,9 +55,14 @@
 							</div>
 
 							<div class="form-group">
-								<input type="text" th:field="*{username}" rules="required|phone"
+								<input type="text" th:field="*{username}" rules="required|username"
 									class="input-element" placeholder="Tài khoản"> <span
 									class="form-message"></span>
+							</div>
+							<div class="form-group">
+								<input type="email" th:field="*{email}" rules="required|email"
+									class="input-element" placeholder="Email" id="exampleInputEmail1" aria-describedby="emailHelp"> <span
+									class="form-message" ></span>
 							</div>
 
 							<div class="form-group">
