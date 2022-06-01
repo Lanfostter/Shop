@@ -27,7 +27,6 @@ public class RegisterController {
 	UserRepository userRepository;
 	@Autowired
 	MailService mailService;
-	
 	@GetMapping("/register")
 	public String userRegister(Model model) {
 		model.addAttribute("user", new UserEntity());
@@ -38,23 +37,11 @@ public class RegisterController {
 		List<String> list = new ArrayList<>();
 		list.add("ROLE_MEMBER");
 		userEntity.setRoles(list);
-		try {
-			MailDTO mailDTO = new MailDTO();
-			mailDTO.setTo(userEntity.getEmail());
-			mailDTO.setSubject(Const.SEND_MAIL_SUBJECT.CLIENT_REGISTER);
-
-			Map<String, Object> props = new HashMap<>();
-			props.put("name", userEntity.getName());
-			props.put("username", userEntity.getUsername());
-			props.put("password", userEntity.getPassword());
-			mailDTO.setProps(props);
-			String TEMPLATE_FILE_NAME = "";
-			mailService.sendHtmlMail(mailDTO, Const.TEMPLATE_FILE_NAME.CLIENT_REGISTER);
-			mailService.sendEmail(mailDTO, "registermail");
-		} catch (MessagingException exp) {
-			exp.printStackTrace();
-		}
-
+		MailDTO mailDTO = new MailDTO();
+		mailDTO.setContent("Bạn đã đăng ký thành công");
+		mailDTO.setSubject("Bạn đã đăng ký thành công");
+		mailDTO.setTo(userEntity.getEmail());
+		mailService.sendEmail(mailDTO, userEntity.getUsername(), userEntity.getPassword());
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		userRepository.save(userEntity);

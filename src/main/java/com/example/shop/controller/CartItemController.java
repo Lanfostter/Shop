@@ -38,6 +38,7 @@ public class CartItemController {
 		return "item";
 	}
 
+
 	@GetMapping("/addtocart")
 	public String addToCart(@RequestParam("id") int id, Model model, Principal principal) {
 
@@ -86,13 +87,6 @@ public class CartItemController {
 		}
 		return "cart";
 	}
-
-	@GetMapping("/delete")
-	public String deleteItem(@RequestParam("id") int id) {
-		cartItemRepository.deleteById(id);
-		return "redirect:/cart/listcartitem";
-	}
-
 	@PostMapping("/updatecartitem")
 	public String updateCartItem(@ModelAttribute("cartitem") CartItem cartItem, Principal principal) {
 		cartItemRepository.save(cartItem);

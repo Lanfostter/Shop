@@ -133,5 +133,10 @@ public class Home {
 			}
 		}
 	}
+	@GetMapping("/deleteitemhome")
+	public String deleteItem(@RequestParam("id") int id) {
+		cartItemRepository.deleteById(id);
+		return "redirect:/home";
+	}
 
 }

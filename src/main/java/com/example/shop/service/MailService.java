@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -23,22 +24,25 @@ public class MailService {
 	@Autowired
 	private SpringTemplateEngine templateEngine;
 
-	public void sendEmail(MailDTO mailDTO, String templateName) {
+	public void sendEmail(MailDTO mailDTO, String username, String password) {
 		try {
 
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
 
+//			 load template email with content
 			Context context = new Context();
 			context.setVariable("name", mailDTO.getTo());
 			context.setVariable("content", mailDTO.getContent());
-			String html = templateEngine.process("registermail", context);
+			context.setVariable("username", username);
+			context.setVariable("password", password);
 
+			String html = templateEngine.process("registermail", context);
 			/// send email
 			helper.setTo(mailDTO.getTo());
+			helper.setText(html, true);
 			helper.setSubject(mailDTO.getSubject());
 			helper.setFrom("fostter2@gmail.com");
-			helper.setText(html, true);
 			javaMailSender.send(message);
 
 		} catch (MessagingException e) {
