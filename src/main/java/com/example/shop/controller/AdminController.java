@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,9 @@ import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
 
 @Controller
-@RequestMapping("/admin")
+/*
+ * @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+ */@RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	ProductRepository productRepository;
@@ -62,5 +65,11 @@ public class AdminController {
 	public String listCategory(Model model) {
 		model.addAttribute("category", categoryRepository.findAll());
 		return "admin/list_category";
+	}
+
+	@GetMapping("/category/delete")
+	public String deleteCategory(@RequestParam("id") int id) {
+		categoryRepository.deleteById(id);
+		return "redirect:/admin/category/list";
 	}
 }

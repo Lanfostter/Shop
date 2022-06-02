@@ -60,8 +60,8 @@ public class CategoryControllerApi {
 
 	@PutMapping("/update")
 	public void update(@RequestParam("imagefile") MultipartFile imagefile,
-			@RequestBody @Validated CategoryEntity categoryEntity) {
-		CategoryEntity oldOne = categoryRepository.getById(categoryEntity.getId());
+			@RequestParam("id") int id) {
+		CategoryEntity oldOne = categoryRepository.getById(id);
 		String originalFilename = imagefile.getOriginalFilename();
 		int lastIndex = originalFilename.lastIndexOf(".");
 		String ext = originalFilename.substring(lastIndex);
@@ -79,7 +79,6 @@ public class CategoryControllerApi {
 			e.printStackTrace();
 		}
 		oldOne.setImg(imagineFilename);
-		oldOne.setName(categoryEntity.getName());
 		categoryRepository.save(oldOne);
 	}
 

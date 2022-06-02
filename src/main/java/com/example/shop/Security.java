@@ -31,7 +31,7 @@ public class Security extends WebSecurityConfigurerAdapter {
 				// .hasAnyRole("ADMIN","SUBADMIN"
 				.hasAnyAuthority("ROLE_ADMIN")
 				// has authenticated
-				.antMatchers("/admin/**","/cart/**","/cartitem/**").authenticated()
+				.antMatchers("/cart/**","/cartitem/**").authenticated()
 				// everyone can join
 				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/css/**", "/img/**", "/home", "/api/**", "/msg/**")
 				.permitAll().anyRequest().permitAll().and().csrf().disable().formLogin().loginPage("/login")
@@ -39,5 +39,4 @@ public class Security extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().accessDeniedPage("/login")
 				.and().logout().logoutSuccessUrl("/home");
 	}
-
 }

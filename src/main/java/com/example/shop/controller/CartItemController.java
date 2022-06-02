@@ -100,4 +100,9 @@ public class CartItemController {
 		cartRepository.save(cart);
 		return "redirect:/cart/listcartitem";
 	}
+	@GetMapping("/delete")
+	public String delete(@RequestParam("id") int id) {
+		cartItemRepository.deleteById(id);
+		return "redirect:/cart/listcartitem";
+	}
 }
