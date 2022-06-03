@@ -100,12 +100,17 @@ public class CartItemController {
 	public String payup(@ModelAttribute("cart") Cart cart) {
 		cart.setBuyDate(new Date());
 		cartRepository.save(cart);
-		return "redirect:/cart/listcartitem";
+		return "redirect:/cart/history";
 	}
 
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") int id) {
 		cartItemRepository.deleteById(id);
 		return "redirect:/cart/listcartitem";
+	}
+
+	@GetMapping("history")
+	public String history() {
+		return "history";
 	}
 }

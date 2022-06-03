@@ -107,12 +107,12 @@
 
 
 				<ul class="header__navbar-user-menu">
-					<li class="header__navbar-user-item"><a th:href="@{/userinfo}">Tài khoản
+					<li class="header__navbar-user-item"><a href="">Tài khoản
 							của tôi</a></li>
 					<li class="header__navbar-user-item"
 						sec:authorize="hasRole('ROLE_ADMIN')"><a
 						th:href="@{/admin/category/list}">Quản lý danh mục</a></li>
-					<li class="header__navbar-user-item" sec:authorize="hasRole('ROLE_MEMBER')"><a th:href="@{/cart/history}">Lịch sử
+					<li class="header__navbar-user-item"><a href="">Địa chỉ
 							của tôi</a></li>
 					<li class="header__navbar-user-item"><a
 						th:href="@{/cart/listcartitem}">Đơn mua</a></li>
