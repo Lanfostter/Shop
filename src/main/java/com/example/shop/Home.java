@@ -64,34 +64,40 @@ public class Home {
 			size = 15;// Số lượng trang
 		if (page == null)
 			page = 0;// Trang hiện tại
-
+		// sắp xếp theo id
 		Sort sort = Sort.by("id").ascending();
 
 		if (sortBy != null && sortBy.equals("lowtohigh")) {
+			// sắp xếp giá tăng dần
 			sort = Sort.by("price").ascending();
 		} else if (sortBy != null && sortBy.equals("hightolow")) {
+			// sắp xếp giá giảm dần
 			sort = Sort.by("price").descending();
 		}
-
+		// phân trang
 		Pageable pageable = PageRequest.of(page, size, sort);
-
+		// tìm kiếm theo tên
 		if (name != null && !name.isEmpty()) {
 			Page<ProductEntity> pageProduct = productRepository.search("%" + name + "%", pageable);
 
 			model.addAttribute("list", pageProduct.toList());
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
+
 		} else if (id != null) {
 			ProductEntity productEntity = productRepository.findById(id).orElse(null);
 			model.addAttribute("list", Arrays.asList(productEntity));
 			// log
 			logger.info("Id not found");
 			model.addAttribute("totalPage", 0);
-		} else if (cat != null && !cat.isEmpty()) {
+		}
+		// tìm kiếm theo danh mục
+		else if (cat != null && !cat.isEmpty()) {
 			Page<ProductEntity> pageProduct = productRepository.searchByCategory("%" + cat + "%", pageable);
 
 			model.addAttribute("list", pageProduct.toList());
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
-		} else {
+		} // danh sách sản phẩm hiện có
+		else {
 			Page<ProductEntity> pageProduct = productRepository.findAll(pageable);
 
 			model.addAttribute("list", pageProduct.toList());
@@ -133,6 +139,7 @@ public class Home {
 			}
 		}
 	}
+
 	@GetMapping("/deleteitemhome")
 	public String deleteItem(@RequestParam("id") int id) {
 		cartItemRepository.deleteById(id);

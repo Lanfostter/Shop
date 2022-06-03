@@ -298,8 +298,9 @@
 											<div class="price-new"
 												th:text="${ci.productEntity.price*43/100}+đ"></div>
 										</div>
-										<form th:action="@{/cart/updatecartitem}"
-											th:object="${cartitem}" method="post">
+										<form class="product-quatity__adjust"
+											th:action="@{/cart/updatecartitem}" th:object="${cartitem}"
+											method="post">
 											<input th:name="id" th:value="${ci.id}" hidden="true">
 											<input th:name="cart.id" th:value="${ci.cart.id}"
 												hidden="true"> <input th:name="productEntity.id"
@@ -358,45 +359,19 @@
 
 				<div class="pay-products" th:each="c : ${cart}">
 					<span class="pay-text">Tổng thanh toán (<span
-						class="quality-js">1</span> Sản phẩm)
+						class="quality-js" th:text="${totalitem}"></span> Sản phẩm)
 					</span> <span class="pay-price"><span class="pay-price--js"
 						th:text="${totalprice * 43/100}"></span>đ</span>
 					<form th:action="@{/cart/payup}" th:object="${cart}" method="post">
 						<input th:name="id" th:value="${c.id}" hidden="true"> <input
-							th:name="userEntity.id" th:value="${c.userEntity.id}" hidden="true">
-							<input
-							th:name="payup" value="true" hidden="true">
+							th:name="userEntity.id" th:value="${c.userEntity.id}"
+							hidden="true"> <input th:name="payup" value="true"
+							hidden="true">
 						<button class="pay-btn" type="submit">Mua Hàng</button>
 					</form>
 				</div>
 
 			</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		</div>
 
 		<div class="no-products mt-20">
@@ -406,67 +381,6 @@
 			<a href="./index.html" class="pay-btn center">Mua ngay</a>
 		</div>
 	</div>
-
-	<div class="grid">
-		<div class="contain-products-sell">
-			<h2>CÓ THỂ BẠN CŨNG THÍCH</h2>
-			<div class="grid__row">
-				<div class="product-relate__list mt-20">
-					<div class="product-relate__hot-sell">
-						<img class="product-relate__img"
-							src="https://cf.shopee.vn/file/a5f04031f216b43cfcb80248e8df47f5_tn">
-						<div class="product-relate__contain">
-							<div class="product-relate__name">Sách - 4MK - J.D. Barker</div>
-							<div class="product-relate__price">116.000đ</div>
-						</div>
-					</div>
-					<div class="product-relate__hot-sell">
-						<img class="product-relate__img"
-							src="https://cf.shopee.vn/file/b755715026beeeb0d92fc4bae3d179da_tn">
-						<div class="product-relate__contain">
-							<div class="product-relate__name">Sách - Combo 6 cuốn
-								truyện trinh thám</div>
-							<div class="product-relate__price">632.000đ</div>
-						</div>
-					</div>
-					<div class="product-relate__hot-sell">
-						<img class="product-relate__img"
-							src="https://cf.shopee.vn/file/58f5a3ca7bb500f6b285405deae46438_tn">
-						<div class="product-relate__contain">
-							<div class="product-relate__name">Sách - Dan Brown Digital</div>
-							<div class="product-relate__price">396.000đ</div>
-						</div>
-					</div>
-					<div class="product-relate__hot-sell">
-						<img class="product-relate__img"
-							src="https://cf.shopee.vn/file/5fa915c20d78f73981bfb050f12f76ca_tn">
-						<div class="product-relate__contain">
-							<div class="product-relate__name">Sách - Dan Brown The Lost</div>
-							<div class="product-relate__price">396.000đ</div>
-						</div>
-					</div>
-					<div class="product-relate__hot-sell">
-						<img class="product-relate__img"
-							src="https://cf.shopee.vn/file/ba0b62924bee14e0dd92aab1bbf91173_tn">
-						<div class="product-relate__contain">
-							<div class="product-relate__name">Sách - Trọn bộ Sherlock
-								Holmes</div>
-							<div class="product-relate__price">216.000đ</div>
-						</div>
-					</div>
-					<div class="product-relate__hot-sell">
-						<img class="product-relate__img"
-							src="https://cf.shopee.vn/file/46000d7c078d6b2ebdcff87b5d8b48c2_tn">
-						<div class="product-relate__contain">
-							<div class="product-relate__name">Bàn phím cơ</div>
-							<div class="product-relate__price">716.000đ</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<footer class="footer mt-80">
 		<div class="footer__top">
 			<div class="grid">

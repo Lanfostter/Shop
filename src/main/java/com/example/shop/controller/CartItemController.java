@@ -38,7 +38,6 @@ public class CartItemController {
 		return "item";
 	}
 
-
 	@GetMapping("/addtocart")
 	public String addToCart(@RequestParam("id") int id, Model model, Principal principal) {
 
@@ -85,8 +84,11 @@ public class CartItemController {
 			model.addAttribute("totalprice", double1);
 
 		}
+		model.addAttribute("totalitem", cartItemRepository.numberItemCart(principal.getName()));
+
 		return "cart";
 	}
+
 	@PostMapping("/updatecartitem")
 	public String updateCartItem(@ModelAttribute("cartitem") CartItem cartItem, Principal principal) {
 		cartItemRepository.save(cartItem);
@@ -100,6 +102,7 @@ public class CartItemController {
 		cartRepository.save(cart);
 		return "redirect:/cart/listcartitem";
 	}
+
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") int id) {
 		cartItemRepository.deleteById(id);
