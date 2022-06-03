@@ -1,95 +1,95 @@
 <footer class="footer" th:fragment="footer">
-			<div class="grid wide footer-content">
-				<div class="row">
-					<div class="col l-2-4 m-4 s-6">
-						<h3 class="footer__heading">Chăm sóc khách hàng</h3>
-						<ul class="footer-list">
-							<li class="footer-item"><a href="" class="footer-item__link">Trung
-									tâm trợ giúp</a></li>
-							<li class="footer-item"><a href="" class="footer-item__link">wibu
-									shop</a></li>
-							<li class="footer-item"><a href="" class="footer-item__link">Hướng
-									dẫn mua hàng</a></li>
-						</ul>
-					</div>
-					<div class="col l-2-4 m-4 s-6">
-						<h3 class="footer__heading">Giới thiệu</h3>
-						<ul class="footer-list">
-							<li class="footer-item"><a href="" class="footer-item__link">Về
-									chúng tôi</a></li>
-							<li class="footer-item"><a href="" class="footer-item__link">Điều
-									khoản</a></li>
-							<li class="footer-item"><a href="" class="footer-item__link">Tuyển
-									dụng</a></li>
-						</ul>
-					</div>
-					<div class="col l-2-4 m-4 s-6">
-						<h3 class="footer__heading">Danh mục</h3>
-						<ul class="footer-list">
-							<li class="footer-item" th:each="c : ${category}"><a href=""
-								class="footer-item__link" th:text="${c.name}"></a></li>
+	<div class="grid wide footer-content container-fluid">
+		<div class="row">
+			<div class="col l-2-4 m-4 s-6 ">
+				<h3 class="footer__heading">Chăm sóc khách hàng</h3>
+				<ul class="footer-list">
+					<li class="footer-item"><a href="" class="footer-item__link">Trung
+							tâm trợ giúp</a></li>
+					<li class="footer-item"><a href="" class="footer-item__link">wibu
+							shop</a></li>
+					<li class="footer-item"><a href="" class="footer-item__link">Hướng
+							dẫn mua hàng</a></li>
+				</ul>
+			</div>
+			<div class="col l-2-4 m-4 s-6">
+				<h3 class="footer__heading">Giới thiệu</h3>
+				<ul class="footer-list">
+					<li class="footer-item"><a href="" class="footer-item__link">Về
+							chúng tôi</a></li>
+					<li class="footer-item"><a href="" class="footer-item__link">Điều
+							khoản</a></li>
+					<li class="footer-item"><a href="" class="footer-item__link">Tuyển
+							dụng</a></li>
+				</ul>
+			</div>
+			<div class="col l-2-4 m-4 s-6">
+				<h3 class="footer__heading">Danh mục</h3>
+				<ul class="footer-list">
+					<li class="footer-item" th:each="c : ${category}"><a href=""
+						class="footer-item__link" th:text="${c.name}"></a></li>
 
-						</ul>
-					</div>
-					<div class="col l-2-4 m-4 s-6">
-						<h3 class="footer__heading">Theo dõi</h3>
-						<ul class="footer-list">
-							<li class="footer-item"><a href="" class="footer-item__link">
-									<i class=" footer-item__icon fab fa-facebook-square"></i>
-									Facebook
-							</a></li>
-							<li class="footer-item"><a href="" class="footer-item__link">
-									<i class=" footer-item__icon fab fa-instagram-square"></i>
-									Instagram
-							</a></li>
-							<li class="footer-item"><a href="" class="footer-item__link">
-									<i class=" footer-item__icon fab fa-linkedin"></i> LinkedIn
-							</a></li>
-						</ul>
-					</div>
-					<div class="col l-2-4 m-4 s-12">
-						<h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
-						<div class="footer__download">
-							<img src="source/img/QRcode.png" alt="Download QR"
-								class="footer__download-qr">
-							<div class="footer__download-apps">
-								<a href="" class="footer__download-app-link"> <img
-									src="source/img/appstore.png" alt="Download appstore "
-									class="footer__download-app-img">
-								</a> <a href="" class="footer__download-app-link"> <img
-									src="source/img/chplay.png" alt="Download appstore "
-									class="footer__download-app-img">
-								</a>
-							</div>
-						</div>
+				</ul>
+			</div>
+			<div class="col l-2-4 m-4 s-6">
+				<h3 class="footer__heading">Theo dõi</h3>
+				<ul class="footer-list">
+					<li class="footer-item"><a href="" class="footer-item__link">
+							<i class=" footer-item__icon fab fa-facebook-square"></i>
+							Facebook
+					</a></li>
+					<li class="footer-item"><a href="" class="footer-item__link">
+							<i class=" footer-item__icon fab fa-instagram-square"></i>
+							Instagram
+					</a></li>
+					<li class="footer-item"><a href="" class="footer-item__link">
+							<i class=" footer-item__icon fab fa-linkedin"></i> LinkedIn
+					</a></li>
+				</ul>
+			</div>
+			<div class="col l-2-4 m-4 s-6">
+				<h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
+				<div class="footer__download">
+					<img src="source/img/QRcode.png" alt="Download QR"
+						class="footer__download-qr">
+					<div class="footer__download-apps">
+						<a href="" class="footer__download-app-link"> <img
+							src="source/img/appstore.png" alt="Download appstore "
+							class="footer__download-app-img">
+						</a> <a href="" class="footer__download-app-link"> <img
+							src="source/img/chplay.png" alt="Download appstore "
+							class="footer__download-app-img">
+						</a>
 					</div>
 				</div>
 			</div>
-			<div class="footer__bottom">
-				<div class="grid wide">
-					<div class="row">
-						<div class="footer__bottom-policy">
-							<div class="policy-heading">
-								<div class="policy-heading-section">Chính sách bảo mật</div>
-								<div class="policy-heading-section">Quy chế hoạt động</div>
-								<div class="policy-heading-section">Chính sách vận chuyển</div>
-								<div class="policy-heading-section">Chính sách trả hàng và
-									hoàn tiền</div>
-							</div>
-							<img src="source/img/policy.png" alt=""
-								class="policy-policy-public-img">
-							<div class="policy-company-name">
-								<span>Công ty Suntech</span>
-							</div>
-							<div class="policy-company-info">
-								<span>Địa chỉ: 175 Tây sơn, Trung Liệt , Đống Đa , Hà Nội</span>
-								<span>Mã số doanh nghiệp: 1928918298194 do sở Kế hoạch &
-									Đầu tư Trường Đại Học Thủy Lợi cấp ngày 22/5/2022</span> <span>©
-									2021 - Bản quyền thuộc về công ty Wibu</span>
-							</div>
-
-						</div>
+		</div>
+	</div>
+	<div class="footer__bottom">
+		<div class="grid wide">
+			<div class="row">
+				<div class="footer__bottom-policy">
+					<div class="policy-heading">
+						<div class="policy-heading-section">Chính sách bảo mật</div>
+						<div class="policy-heading-section">Quy chế hoạt động</div>
+						<div class="policy-heading-section">Chính sách vận chuyển</div>
+						<div class="policy-heading-section">Chính sách trả hàng và
+							hoàn tiền</div>
 					</div>
+					<img src="source/img/policy.png" alt=""
+						class="policy-policy-public-img">
+					<div class="policy-company-name">
+						<span>Công ty Suntech</span>
+					</div>
+					<div class="policy-company-info">
+						<span>Địa chỉ: 175 Tây sơn, Trung Liệt , Đống Đa , Hà Nội</span> <span>Mã
+							số doanh nghiệp: 1928918298194 do sở Kế hoạch & Đầu tư Trường Đại
+							Học Thủy Lợi cấp ngày 22/5/2022</span> <span>© 2021 - Bản quyền
+							thuộc về công ty Wibu</span>
+					</div>
+
 				</div>
 			</div>
-		</footer>
+		</div>
+	</div>
+</footer>

@@ -145,8 +145,11 @@ public class Home {
 		cartItemRepository.deleteById(id);
 		return "redirect:/home";
 	}
+
 	@GetMapping("/userinfo")
-	public String userInfo() {
+	public String userInfo(Model model) {
+		model.addAttribute("category", categoryRepository.findAll());
+
 		return "userinfo";
 	}
 }
