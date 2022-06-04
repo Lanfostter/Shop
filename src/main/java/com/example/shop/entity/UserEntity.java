@@ -1,5 +1,6 @@
 package com.example.shop.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -33,6 +34,10 @@ public class UserEntity {
 	private String username;
 	@Column(name = "u_password")
 	private String password;
+	@Column(name = "u_gender")
+	private String gender;
+	@Column(name = "u_birthday")
+	private Date birthday;
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "u_role")
 	@CollectionTable(name = "user_role", 
