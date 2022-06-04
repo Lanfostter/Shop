@@ -1,5 +1,7 @@
 package com.example.shop.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.shop.dto.MailDTO;
 import com.example.shop.entity.UserEntity;
@@ -27,13 +30,16 @@ public class RegisterController {
 	UserRepository userRepository;
 	@Autowired
 	MailService mailService;
+
 	@GetMapping("/register")
 	public String userRegister(Model model) {
 		model.addAttribute("user", new UserEntity());
 		return "register";
 	}
+
 	@PostMapping("/register")
-	public String userRegister(@ModelAttribute("user") UserEntity userEntity) {
+	public String userRegister(@ModelAttribute("user") UserEntity userEntity, @RequestParam("birthday") String date)
+			throws ParseException {
 		List<String> list = new ArrayList<>();
 		list.add("ROLE_MEMBER");
 		userEntity.setRoles(list);
@@ -44,6 +50,8 @@ public class RegisterController {
 		mailService.sendEmail(mailDTO, userEntity.getUsername(), userEntity.getPassword());
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+		userEntity.setBirthday(simpleDateFormat.parse(date));
 		userRepository.save(userEntity);
 		return "redirect:/login";
 	}

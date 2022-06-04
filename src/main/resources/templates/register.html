@@ -42,14 +42,12 @@
 
 		<div class="banner-sale">
 			<!-- thay backgr o day -->
-			<div class="banner-sale__img" style="background-image: url('');">
-
+			<div class="banner-sale__img">
 				<form th:action="@{/register}" th:object="${user}" method="POST"
-					id="form-register">
+					id="form-register" style="border: 1px green solid ">
 					<div class="form-user">
 						<div class="form-user__title">Đăng Ký</div>
 						<div class="form-user__contain">
-
 							<div class="form-group">
 								<input type="text" rules="required" class="input-element"
 									placeholder="Họ tên" th:field="*{name}"> <span
@@ -98,7 +96,7 @@
 		</div>
 	</div>
 
-	<footer class="footer mt-80">
+	<footer class="footer" style="margnin-top:10px;">
 		<div class="footer__top">
 			<div class="grid">
 				<div class="grid__row b-tb-1 footer__space">

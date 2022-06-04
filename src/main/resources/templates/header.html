@@ -107,14 +107,14 @@
 
 
 				<ul class="header__navbar-user-menu">
-					<li class="header__navbar-user-item"><a th:href="@{/userinfo}">Tài khoản
+					<li class="header__navbar-user-item" sec:authorize="isAuthenticated()"><a th:href="@{/userinfo}">Tài khoản
 							của tôi</a></li>
 					<li class="header__navbar-user-item"
 						sec:authorize="hasRole('ROLE_ADMIN')"><a
 						th:href="@{/admin/category/list}">Quản lý danh mục</a></li>
 					<li class="header__navbar-user-item" sec:authorize="hasRole('ROLE_MEMBER')"><a th:href="@{/cart/history}">Lịch sử
 							của tôi</a></li>
-					<li class="header__navbar-user-item"><a
+					<li class="header__navbar-user-item" sec:authorize="isAuthenticated()"><a
 						th:href="@{/cart/listcartitem}">Đơn mua</a></li>
 					<li sec:authorize="isAuthenticated()"
 						class="header__navbar-user-item header__navbar-user-item--logout">

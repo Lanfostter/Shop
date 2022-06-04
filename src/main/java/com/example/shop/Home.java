@@ -33,10 +33,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.shop.entity.Cart;
 import com.example.shop.entity.CartItem;
 import com.example.shop.entity.ProductEntity;
+import com.example.shop.entity.UserEntity;
 import com.example.shop.repository.CartItemRepository;
 import com.example.shop.repository.CartRepository;
 import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
+import com.example.shop.repository.UserRepository;
 
 @Controller
 public class Home {
@@ -51,7 +53,8 @@ public class Home {
 	CartRepository cartRepository;
 	@Autowired
 	CartItemRepository cartItemRepository;
-
+	@Autowired
+	UserRepository userRepository;
 	// trang chủ, phân trang, tìm kiếm, sắp xếp
 	@GetMapping("/home")
 	public String home(Model model, @RequestParam(name = "name", required = false) String name,
@@ -147,9 +150,11 @@ public class Home {
 	}
 
 	@GetMapping("/userinfo")
-	public String userInfo(Model model) {
+	public String userInfo(Model model, Principal principal) {
 		model.addAttribute("category", categoryRepository.findAll());
-
+		UserEntity userEntity = userRepository.findByUsername(principal.getName());
+		model.addAttribute("userinfo", userEntity);
+		
 		return "userinfo";
 	}
 }

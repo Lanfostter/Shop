@@ -109,8 +109,9 @@
 			</div>
 			<!-- end list -->
 			<!-- form  -->
-			<div class="col-9 mt-3 bg-light "
-				style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+			<div class="col-9 mt-3 bg-light"
+				style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+				th:each="ui : ${userinfo}">
 				<div class="row g-1 mt-3 ms-5">
 					<!-- thông tin cá nhân -->
 					<div class="col-12 fs-5 ">Thông tin cá nhân</div>
@@ -125,7 +126,8 @@
 								<div class="col-9">
 									<input type="text" class="form-control w-3"
 										aria-label="Sizing example input"
-										aria-describedby="inputGroup-sizing-sm">
+										aria-describedby="inputGroup-sizing-sm"
+										th:placeholder="${ui.username}" disabled="disabled">
 								</div>
 							</div>
 							<!-- tên -->
@@ -134,7 +136,8 @@
 								<div class="col-9">
 									<input type="text" class="form-control w-3"
 										aria-label="Sizing example input"
-										aria-describedby="inputGroup-sizing-sm">
+										aria-describedby="inputGroup-sizing-sm"
+										th:placeholder="${ui.name}" disabled="disabled">
 								</div>
 							</div>
 							<!-- Email -->
@@ -143,25 +146,8 @@
 								<div class="col-9">
 									<input type="text" class="form-control w-3"
 										aria-label="Sizing example input"
-										aria-describedby="inputGroup-sizing-sm">
-								</div>
-							</div>
-							<!-- Số điện thoại -->
-							<div class="row mt-3 text-end">
-								<div class="col-3 mt-1">Số điện thoại</div>
-								<div class="col-9">
-									<input type="number" class="form-control w-3"
-										aria-label="Sizing example input"
-										aria-describedby="inputGroup-sizing-sm">
-								</div>
-							</div>
-							<!-- tên shop -->
-							<div class="row mt-3 text-end">
-								<div class="col-3 mt-1">Tên shop</div>
-								<div class="col-9">
-									<input type="text" class="form-control w-3"
-										aria-label="Sizing example input"
-										aria-describedby="inputGroup-sizing-sm">
+										aria-describedby="inputGroup-sizing-sm"
+										th:placeholder="${ui.email}" disabled="disabled">
 								</div>
 							</div>
 							<!-- Giới tính -->
@@ -169,174 +155,77 @@
 								<div class="col-3 mt-1">Giới tính</div>
 								<div class="col-9">
 									<div class="row g-0">
-										<div class="col-2 ">
-											<div class="form-check">
-												<input class="form-check-input ms-1  " type="radio"
-													name="flexRadioDefault" id="flexRadioDefault1"> <label
-													class="form-check-label" for="flexRadioDefault1">
-													Nữ </label>
-											</div>
-										</div>
+
 										<div class="col-3 ">
 											<div class="form-check">
 												<input class="form-check-input ms-4 " type="radio"
 													name="flexRadioDefault" id="flexRadioDefault2" checked>
-												<label class="form-check-label" for="flexRadioDefault2">
-													Nam </label>
+												<label class="form-check-label" for="flexRadioDefault2"
+													th:placeholder="${ui.gender}" disabled="disabled">
+												</label>
 											</div>
 										</div>
-										<div class="col-2 ">
-											<div class="form-check">
-												<input class="form-check-input ms-1 " type="radio"
-													name="flexRadioDefault" id="flexRadioDefault1"> <label
-													class="form-check-label ms-0" for="flexRadioDefault1">
-													Vũ </label>
-											</div>
-										</div>
+
 									</div>
 								</div>
 								<!-- Ngày sinh -->
-								<div class="row mt-3 text-end">
-									<div class="col-3 mt-1">Ngày sinh</div>
-									<div class="col-9">
-										<div class="row g-1">
-											<div class="col-4">
-												<select class="form-select" size-31
-													aria-label="size-31 select example">
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-													<option value="6">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-													<option value="9">9</option>
-													<option value="10">10</option>
-													<option value="11">11</option>
-													<option value="12">12</option>
-													<option value="13">13</option>
-													<option value="14">14</option>
-													<option value="15">15</option>
-													<option value="16">16</option>
-													<option value="17">17</option>
-													<option value="18">18</option>
-													<option value="19">19</option>
-													<option value="20">20</option>
-													<option value="21">21</option>
-													<option value="22">22</option>
-													<option value="23">23</option>
-													<option value="24">24</option>
-													<option value="25">25</option>
-													<option value="26">26</option>
-													<option value="27">27</option>
-													<option value="28">28</option>
-													<option value="29">29</option>
-													<option value="30">30</option>
-													<option value="31">31</option>
+								<div class="row mt-3 text-end border">
+									<div class="col-3 mt-1">Giới tính</div>
 
-												</select>
-											</div>
-											<div class="col-4">
-												<select class="form-select" size-12
-													aria-label="size-12 select example">
-													<option value="1">Tháng 1</option>
-													<option value="2">Tháng 2</option>
-													<option value="3">Tháng 3</option>
-													<option value="4">Tháng 4</option>
-													<option value="5">Tháng 5</option>
-													<option value="6">Tháng 6</option>
-													<option value="7">Tháng 7</option>
-													<option value="8">Tháng 8</option>
-													<option value="9">Tháng 9</option>
-													<option value="10">Tháng 10</option>
-													<option value="11">Tháng 11</option>
-													<option value="12">Tháng 12</option>
-												</select>
-											</div>
-											<div class="col-4">
-												<select class="form-select" size-12
-													aria-label="size-12 select example">
-													<option value="1">2001</option>
-													<option value="2">2002</option>
-													<option value="3">2003</option>
-													<option value="4">2004</option>
-													<option value="5">2005</option>
-													<option value="6">2006</option>
-													<option value="7">2007</option>
-													<option value="8">2008</option>
-													<option value="9">2009</option>
-													<option value="10">2010</option>
-													<option value="11">2011</option>
-													<option value="12">2012</option>
-													<option value="13">2013</option>
-													<option value="14">2014</option>
-													<option value="15">2015</option>
-													<option value="16">2016</option>
-													<option value="17">2017</option>
-													<option value="18">2018</option>
-													<option value="19">2019</option>
-													<option value="20">2020</option>
-													<option value="21">2021</option>
-													<option value="22">2022</option>
-												</select>
-											</div>
-										</div>
+
+									<!-- end bd -->
+								</div>
+								<input class="btn btn-danger mt-4" style="margin-left: 25%;"
+									type="submit" value="Lưu">
+
+
+							</div>
+							<!-- end input -->
+							<!-- set avatar -->
+							<div class="col-3 border-top mt-4 ">
+								<div class="border-start">
+									<!-- avatar  -->
+									<div class="col-12 mt-3 ms-4 ">
+										<img src="img/download.png"
+											style="width: 70%; border-radius: 50%;" alt="">
 									</div>
+									<div class="col-12 ">
+										<button type="button" class="btn btn-light border ms-5 mt-4">Chọn
+											ảnh</button>
+									</div>
+									<div class="col-12 text-center ms-2 mt-3">Dụng lượng file
+										tối đa 1 MB Định dạng:.JPEG, .PNG</div>
 								</div>
-								<!-- end bd -->
 							</div>
-							<input class="btn btn-danger mt-4" style="margin-left: 25%;"
-								type="submit" value="Lưu">
-
-
+							<!-- end set avatar -->
 						</div>
-						<!-- end input -->
-						<!-- set avatar -->
-						<div class="col-3 border-top mt-4 ">
-							<div class="border-start">
-								<!-- avatar  -->
-								<div class="col-12 mt-3 ms-4 ">
-									<img src="img/download.png"
-										style="width: 70%; border-radius: 50%;" alt="">
-								</div>
-								<div class="col-12 ">
-									<button type="button" class="btn btn-light border ms-5 mt-4">Chọn
-										ảnh</button>
-								</div>
-								<div class="col-12 text-center ms-2 mt-3">Dụng lượng file
-									tối đa 1 MB Định dạng:.JPEG, .PNG</div>
-							</div>
-						</div>
-						<!-- end set avatar -->
 					</div>
+					<!-- end form  -->
 				</div>
-				<!-- end form  -->
+			</div>
+			<!--end  user infomation-->
+			<!-- chat -->
+			<div class="fixed-bottom btn-danger col-1 text-center "
+				style="height: 7%; margin-left: 91%; border-radius: 5px;">
+				<div class="row g-0 fs-2">
+					<div class="col-5">
+						<i class='fas fa-comments'></i>
+					</div>
+					<div class="col-7 text-light">Chat</div>
+				</div>
 			</div>
 		</div>
-		<!--end  user infomation-->
-		<!-- chat -->
-		<div class="fixed-bottom btn-danger col-1 text-center "
-			style="height: 7%; margin-left: 91%; border-radius: 5px;">
-			<div class="row g-0 fs-2">
-				<div class="col-5">
-					<i class='fas fa-comments'></i>
-				</div>
-				<div class="col-7 text-light">Chat</div>
-			</div>
-		</div>
-	</div>
-	<!-- end chat -->
-	<!-- footer  -->
-	<footer class="footer" th:replace="footer.html :: footer"></footer>
+		<!-- end chat -->
+		<!-- footer  -->
+		<footer class="footer" th:replace="footer.html :: footer"></footer>
 
-	<!-- end footer -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/925bc4635d.js"
-		crossorigin="anonymous"></script>
+		<!-- end footer -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+			crossorigin="anonymous"></script>
+		<script src="https://kit.fontawesome.com/925bc4635d.js"
+			crossorigin="anonymous"></script>
 </body>
 
 </html>
