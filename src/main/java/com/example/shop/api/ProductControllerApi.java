@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.shop.entity.ProductEntity;
+import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
 
 @RestController
@@ -23,7 +24,7 @@ import com.example.shop.repository.ProductRepository;
 public class ProductControllerApi {
 	@Autowired
 	ProductRepository productRepository;
-
+	
 	@PostMapping("/add")
 	// @ResponseBody nếu ko sử dụng restcontroller
 	public ProductEntity addproduct(@RequestParam("imagefile") MultipartFile imagefile,

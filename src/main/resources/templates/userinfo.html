@@ -42,13 +42,13 @@
 						<div class="row g-0">
 							<!-- avatar -->
 							<div class="col-4">
-								<img src="img/download.png" style="width: 100%;"
+								<img th:src="@{/img/download.jpg}" style="width: 100%;"
 									class="rounded-circle" alt="...">
 							</div>
 							<!-- name -->
 							<div class="col-8 ">
 								<div class="row g-0 mt-3  ">
-									<p class="col-12 mb-0 ms-3">User</p>
+									<p class="col-12 mb-0 ms-3" th:text="${nameuser}"></p>
 									<p class="col-12 ms-3">
 										<i class='fas fa-edit'></i> Sủa thông tin
 									</p>
@@ -110,7 +110,7 @@
 			<!-- end list -->
 			<!-- form  -->
 			<div class="col-9 mt-3 bg-light"
-				style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+				style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; height: 300px; margin-bottom: 10px;"
 				th:each="ui : ${userinfo}">
 				<div class="row g-1 mt-3 ms-5">
 					<!-- thông tin cá nhân -->
@@ -161,7 +161,7 @@
 												<input class="form-check-input ms-4 " type="radio"
 													name="flexRadioDefault" id="flexRadioDefault2" checked>
 												<label class="form-check-label" for="flexRadioDefault2"
-													th:placeholder="${ui.gender}" disabled="disabled">
+													th:text="${ui.gender}" disabled="disabled">
 												</label>
 											</div>
 										</div>
@@ -169,15 +169,18 @@
 									</div>
 								</div>
 								<!-- Ngày sinh -->
-								<div class="row mt-3 text-end border">
-									<div class="col-3 mt-1">Giới tính</div>
-
-
+								<div class="row mt-3 text-end ">
+									<div class="col-3 mt-1 ms-3">Ngày sinh</div>
+									<div class="col-8">
+										<input type="text" class="form-control ms-0"
+											aria-label="Sizing example input"
+											aria-describedby="inputGroup-sizing-sm "
+											th:placeholder="${#dates.format(ui.birthday, 'dd-MM-yyyy')}" disabled="disabled" style="width:116% ;">
+									</div>
+								</div>
 									<!-- end bd -->
 								</div>
-								<input class="btn btn-danger mt-4" style="margin-left: 25%;"
-									type="submit" value="Lưu">
-
+								
 
 							</div>
 							<!-- end input -->
@@ -217,7 +220,7 @@
 		</div>
 		<!-- end chat -->
 		<!-- footer  -->
-		<footer class="footer" th:replace="footer.html :: footer"></footer>
+		<footer  class="footer" th:replace="footer.html :: footer"></footer>
 
 		<!-- end footer -->
 		<script

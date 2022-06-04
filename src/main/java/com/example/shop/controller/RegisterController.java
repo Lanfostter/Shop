@@ -38,7 +38,7 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
-	public String userRegister(@ModelAttribute("user") UserEntity userEntity, @RequestParam("birthday") String date)
+	public String userRegister(@ModelAttribute("user") UserEntity userEntity, @RequestParam("bdate") String date)
 			throws ParseException {
 		List<String> list = new ArrayList<>();
 		list.add("ROLE_MEMBER");
@@ -50,7 +50,7 @@ public class RegisterController {
 		mailService.sendEmail(mailDTO, userEntity.getUsername(), userEntity.getPassword());
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		userEntity.setBirthday(simpleDateFormat.parse(date));
 		userRepository.save(userEntity);
 		return "redirect:/login";

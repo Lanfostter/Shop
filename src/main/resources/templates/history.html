@@ -98,7 +98,7 @@
 				</div>
 				<!-- end list -->
 				<!-- history -->
-				<div class="col-9">
+				<div class="col-9" th:each="c : ${history}">
 					<div class="row g-0">
 						<div class="col-12 border mb-3"
 							style="background-color: rgb(214, 214, 214);">
@@ -118,25 +118,6 @@
 								<!-- sản phẩm -->
 								<div class="col-12 mt-3  ">
 									<div class="row g-0">
-										<!-- tên shop -->
-										<div class="col-6  ">
-											<nav class="nav ">
-												<a class="nav-link " href="#"> <!-- logo của shop --> <img
-													src="img/mall.png" style="width: 100%; margin-left: 0;"
-													alt="photo">
-												</a>
-												<!-- tên shop -->
-												<a class="nav-link text-dark " href="#">Tên shop</a>
-												<!-- chat -->
-												<a class="nav-link bg-danger text-light rounded" href="#">
-													<i class='far fa-comment'> Chat</i>
-												</a>
-												<!-- xem shop -->
-												<a class="nav-link disabled border text-dark ms-2"> <i
-													class='fas fa-school'> Xem shop</i>
-												</a>
-											</nav>
-										</div>
 										<!-- đánh giá -->
 										<div class="col-6">
 											<ul class="nav justify-content-end">
@@ -156,8 +137,7 @@
 												</div>
 												<div class="col-7">
 													<!-- tên sp -->
-													<a href="#" class="nav-link text-dark  mt-4 fs-5"> tên
-														sản phẩm</a>
+													<a href="#" class="nav-link text-dark  mt-4 fs-5" ></a>
 													<!-- phân loại -->
 													<a href="#" class="nav-link text-dark  mt-2 "> Phân
 														loại hàng </a>
@@ -207,108 +187,6 @@
 								</div>
 							</div>
 						</div>
-
-
-						<div class="col-12 bg-light border-bottom mt-4 "
-							style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-							<div class="row g-0">
-								<!-- sản phẩm -->
-								<div class="col-12 mt-3 ">
-									<div class="row g-0">
-										<!-- tên shop -->
-										<div class="col-6  ">
-											<nav class="nav ">
-												<a class="nav-link " href="#"> <!-- logo của shop --> <img
-													src="img/mall.png" style="width: 100%; margin-left: 0;"
-													alt="photo">
-												</a>
-												<!-- tên shop -->
-												<a class="nav-link text-dark " href="#">Tên shop</a>
-												<!-- chat -->
-												<a class="nav-link bg-danger text-light rounded" href="#">
-													<i class='far fa-comment'> Chat</i>
-												</a>
-												<!-- xem shop -->
-												<a class="nav-link disabled border text-dark ms-2"> <i
-													class='fas fa-school'> Xem shop</i>
-												</a>
-											</nav>
-										</div>
-										<!-- đánh giá -->
-										<div class="col-6">
-											<ul class="nav justify-content-end">
-
-												<li class="nav-item"><a class="nav-link " href="#"><i
-														class='fas fa-taxi'> Giao hàng thành công </i></a></li>
-												<li class="mt-2">|</li>
-												<li class="nav-item"><a class="nav-link text-danger">ĐÃ
-														GIAO</a></li>
-											</ul>
-										</div>
-										<div class="col-12 border-top mt-4 ">
-											<div class="row g-0">
-												<div class="col-2 ms-3">
-													<img src="img/download.png"
-														style="width: 80%; margin: 20px; margin-left: 0;" alt="">
-												</div>
-												<div class="col-7">
-													<!-- tên sp -->
-													<a href="#" class="nav-link text-dark  mt-4 fs-5"> tên
-														sản phẩm</a>
-													<!-- phân loại -->
-													<a href="#" class="nav-link text-dark  mt-2 "> Phân
-														loại hàng </a>
-													<!-- số lượng -->
-													<a href="" class="nav-link text-dark  mt-0"> x1</a>
-												</div>
-												<div class="col-2 mt-4">
-													<a href="" class="nav-link text-danger text-center mt-5">222.000
-														đ</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- giá -->
-						<div class="col-12 border bg-light mb-4"
-							style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-							<div class="row">
-								<!-- Tổng số tiền -->
-								<div class="col-12  mt-4">
-									<ul class="nav justify-content-end">
-										<li class="nav-item"><a class="nav-link text-dark mt-1 "
-											href="#">Tổng số tiền:</a></li>
-										<!-- tiền -->
-										<li class="nav-item" style="margin-right: 20px;"><a
-											class="nav-link text-danger fs-4 " href="#">2222đ</a></li>
-
-									</ul>
-								</div>
-								<!-- đánh giá liên hệ -->
-								<div class="col-12 mb-3">
-									<ul class="nav justify-content-end">
-										<li class="nav-item"><a class="nav-link " href="#"><button
-													type="button" class="btn btn-danger " style="width: 180px;">Đánh
-													Giá</button></a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><button
-													type="button" class="btn btn-light border"
-													style="width: 180px;">Liên Hệ Người Bán</button></a></li>
-										<li class="nav-item" style="margin-right: 20px;"><a
-											class="nav-link" href="#"><button type="button"
-													class="btn btn-light border" style="width: 180px;">Mua
-													Lại</button></a></li>
-
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-			<!-- end history  -->
 		</div>
 		<!--end  user infomation-->
 		<!-- chat -->

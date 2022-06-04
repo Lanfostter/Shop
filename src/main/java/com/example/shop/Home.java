@@ -154,7 +154,7 @@ public class Home {
 		model.addAttribute("category", categoryRepository.findAll());
 		UserEntity userEntity = userRepository.findByUsername(principal.getName());
 		model.addAttribute("userinfo", userEntity);
-		
+		model.addAttribute("nameuser", userEntity.getName());
 		return "userinfo";
 	}
 }

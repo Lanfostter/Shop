@@ -110,7 +110,8 @@ public class CartItemController {
 	}
 
 	@GetMapping("history")
-	public String history() {
+	public String history(Model model, Principal principal) {
+		model.addAttribute("history", cartRepository.findbyHistory(principal.getName()));
 		return "history";
 	}
 }

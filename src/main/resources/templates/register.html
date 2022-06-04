@@ -40,11 +40,11 @@
 			</div>
 		</header>
 
-		<div class="banner-sale">
+		<div class="banner-sale" style="height: 700px;">
 			<!-- thay backgr o day -->
 			<div class="banner-sale__img">
 				<form th:action="@{/register}" th:object="${user}" method="POST"
-					id="form-register" style="border: 1px green solid ">
+					id="form-register" style=" margin-top:10%";>
 					<div class="form-user">
 						<div class="form-user__title">Đăng Ký</div>
 						<div class="form-user__contain">
@@ -72,7 +72,7 @@
 									placeholder="Mật khẩu"> <span class="form-message"></span>
 							</div>
 							<div class="form-group">
-								<input type="date" name="birthday" rules="required|date"
+								<input type="date" name="bdate" rules="required|date"
 									class="input-element" placeholder="BirthDay"
 									aria-describedby="form-message"> <span
 									class="form-message"></span>
@@ -96,7 +96,7 @@
 		</div>
 	</div>
 
-	<footer class="footer" style="margnin-top:10px;">
+	<footer class="footer">
 		<div class="footer__top">
 			<div class="grid">
 				<div class="grid__row b-tb-1 footer__space">
