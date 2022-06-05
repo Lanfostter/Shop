@@ -27,6 +27,8 @@ public class Cart {
 	private Date buyDate;
 	@Column(name = "c_payup")
 	private Boolean payup;
+	@Column(name = "c_totalprice")
+	private double totalprice;
 	@ManyToOne
 	@JoinColumn(name = "u_id")
 	private UserEntity userEntity;

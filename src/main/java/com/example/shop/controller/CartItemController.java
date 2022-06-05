@@ -48,17 +48,20 @@ public class CartItemController {
 			cart.setUserEntity(userRepository.findByUsername(principal.getName()));
 			cart.setBuyDate(new Date());
 			cart.setPayup(false);
+			cart.setTotalprice(0);
 			cartRepository.save(cart);
 			CartItem cartItem = new CartItem();
 			cartItem.setQuantity(1);
 			cartItem.setProductEntity(productRepository.findById(id).get());
 			cartItem.setCart(cart);
+
 			cartItemRepository.save(cartItem);
 		} else {
 			Cart cart = cartRepository.findByUserEntity(principal.getName());
 			if (cartItemRepository.findByProId(id, cart.getId()) != null) {
 				CartItem cartItem = cartItemRepository.findByProId(id, cart.getId());
 				cartItem.setQuantity(cartItem.getQuantity() + 1);
+				
 				cartItemRepository.save(cartItem);
 			} else {
 				CartItem cartItem = new CartItem();
@@ -81,7 +84,7 @@ public class CartItemController {
 			for (CartItem cartItem : cartRepository.findByUserEntity(principal.getName()).getCartIteams()) {
 				double1 += (cartItem.getQuantity() * cartItem.getProductEntity().getPrice());
 			}
-			model.addAttribute("totalprice", double1);
+			model.addAttribute("totalprice1", double1);
 
 		}
 		model.addAttribute("totalitem", cartItemRepository.numberItemCart(principal.getName()));

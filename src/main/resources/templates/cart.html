@@ -361,11 +361,13 @@
 					<span class="pay-text">Tổng thanh toán (<span
 						class="quality-js" th:text="${totalitem}"></span> Sản phẩm)
 					</span> <span class="pay-price"><span class="pay-price--js"
-						th:text="${totalprice * 43/100}"></span>đ</span>
+						th:text="${totalprice1}"></span>đ</span>
 					<form th:action="@{/cart/payup}" th:object="${cart}" method="post">
+
 						<input th:name="id" th:value="${c.id}" hidden="true"> <input
 							th:name="userEntity.id" th:value="${c.userEntity.id}"
 							hidden="true"> <input th:name="payup" value="true"
+							hidden="true"> <input th:name="totalprice" th:value="${totalprice1}"
 							hidden="true">
 						<button class="pay-btn" type="submit">Mua Hàng</button>
 					</form>
