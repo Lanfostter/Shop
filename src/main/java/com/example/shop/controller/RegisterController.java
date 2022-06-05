@@ -1,19 +1,16 @@
 package com.example.shop.controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.mail.MessagingException;
+import javax.validation.Valid;
 
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +35,11 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
-	public String userRegister(@ModelAttribute("user") UserEntity userEntity, @RequestParam("bdate") String date)
-			throws ParseException {
+	public String userRegister(@Valid @ModelAttribute("user") UserEntity userEntity, @RequestParam("bdate") String date,
+			BindingResult bindingResult) throws Exception {
+		if (bindingResult.hasErrors()) {
+			return "register";
+		}
 		List<String> list = new ArrayList<>();
 		list.add("ROLE_MEMBER");
 		userEntity.setRoles(list);

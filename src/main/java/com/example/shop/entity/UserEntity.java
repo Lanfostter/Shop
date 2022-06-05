@@ -14,7 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -30,8 +31,11 @@ public class UserEntity {
 	private String name;
 	@Column(name = "u_email")
 	private String email;
+	@NotEmpty
 	@Column(name = "u_username")
 	private String username;
+	@Size(min = 5, message = "Mật khẩu tối thiểu 5 kí tự")
+	@NotEmpty
 	@Column(name = "u_password")
 	private String password;
 	@Column(name = "u_gender")

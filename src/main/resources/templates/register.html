@@ -44,7 +44,7 @@
 			<!-- thay backgr o day -->
 			<div class="banner-sale__img">
 				<form th:action="@{/register}" th:object="${user}" method="POST"
-					id="form-register" style=" margin-top:10%";>
+					id="form-register" style="margin-top: 10%";>
 					<div class="form-user">
 						<div class="form-user__title">Đăng Ký</div>
 						<div class="form-user__contain">
@@ -69,7 +69,9 @@
 							<div class="form-group">
 								<input type="password" th:field="*{password}"
 									rules="required|password" class="input-element"
-									placeholder="Mật khẩu"> <span class="form-message"></span>
+									placeholder="Mật khẩu"> <span
+									th:if="${#fields.hasErrors('password')}"
+									th:errors="*{password}"></span>
 							</div>
 							<div class="form-group">
 								<input type="date" name="bdate" rules="required|date"

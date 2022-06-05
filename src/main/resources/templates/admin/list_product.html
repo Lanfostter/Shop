@@ -27,7 +27,7 @@
 	<div class="container-fluid">
 		<div style="height: 200px"
 			class="d-flex justify-content-center d-flex align-items-center">
-			<p class="h1">LIST CATEGORY</p>
+			<p class="h1">LIST PRODUCT</p>
 		</div>
 		<div class="form-floating mb-3">
 			<div class="row">
@@ -46,7 +46,7 @@
 					</form>
 				</div>
 				<div class="col-md">
-					<a th:href="@{/admin/category/add}"><i class="fa-solid fa-plus"></i></a>
+					<a th:href="@{/admin/product/add}"><i class="fa-solid fa-plus"></i></a>
 				</div>
 			</div>
 			<div>
@@ -59,20 +59,25 @@
 									<th>ID</th>
 									<th>Name</th>
 									<th>Image</th>
+									<th>Price</th>
+									<th>Description</th>
+									<th>Category</th>
 									<th>Update</th>
 									<th>Delete</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="c : ${category}">
-									<td colspan="1" class="" th:text="${c.id}"></td>
-									<td colspan="1" th:text="${c.name}"></td>
+								<tr th:each="p : ${products}">
+									<td colspan="1" class="" th:text="${p.id}"></td>
+									<td colspan="1" th:text="${p.name}"></td>
 									<td colspan="1"><img style="width: 100px; height: 100px"
-										th:src="@{'/download?image='+${c.img}}" alt=""></td>
-
-									<td colspan="1"><a th:href="@{'/admin/category/update?id='+${c.id}}"><i
+										th:src="@{'/download?image='+${p.img}}" alt=""></td>
+									<td colspan="1" th:text="${p.price}"></td>
+									<td colspan="1" th:text="${p.description}"></td>
+									<td colspan="1" th:text="${p.categoryEntity.name}"></td>
+									<td colspan="1"><a th:href="@{/#}"><i
 											class="fa-solid fa-user-pen text-primary"></i></a></td>
-									<td colspan="1"><a th:href="@{'/admin/category/delete?id='+${c.id}}"><i
+									<td colspan="1"><a th:href="@{/#}"><i
 											class="fa-solid fa-user-slash text-danger"></i></a></td>
 								</tr>
 							</tbody>
