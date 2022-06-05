@@ -109,9 +109,16 @@ public class CartItemController {
 		return "redirect:/cart/listcartitem";
 	}
 
-	@GetMapping("history")
+	@GetMapping("/history")
 	public String history(Model model, Principal principal) {
-		model.addAttribute("history", cartRepository.findbyHistory(principal.getName()));
+		model.addAttribute("carthistory", cartRepository.findbyHistory(principal.getName()));
+		int double1 = 0;
+		for (Cart cart : cartRepository.findbyHistory(principal.getName())) {
+			for (CartItem cartItem : cart.getCartIteams()) {
+				double1 += (cartItem.getQuantity() * cartItem.getProductEntity().getPrice());
+			}
+		}
+		model.addAttribute("totalprice", double1);
 		return "history";
 	}
 }

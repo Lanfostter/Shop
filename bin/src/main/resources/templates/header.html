@@ -107,14 +107,14 @@
 
 
 				<ul class="header__navbar-user-menu">
-					<li class="header__navbar-user-item"><a href="">Tài khoản
+					<li class="header__navbar-user-item" sec:authorize="isAuthenticated()"><a th:href="@{/userinfo}">Tài khoản
 							của tôi</a></li>
 					<li class="header__navbar-user-item"
 						sec:authorize="hasRole('ROLE_ADMIN')"><a
 						th:href="@{/admin/category/list}">Quản lý danh mục</a></li>
-					<li class="header__navbar-user-item"><a href="">Địa chỉ
+					<li class="header__navbar-user-item" sec:authorize="hasRole('ROLE_MEMBER')"><a th:href="@{/cart/history}">Lịch sử
 							của tôi</a></li>
-					<li class="header__navbar-user-item"><a
+					<li class="header__navbar-user-item" sec:authorize="isAuthenticated()"><a
 						th:href="@{/cart/listcartitem}">Đơn mua</a></li>
 					<li sec:authorize="isAuthenticated()"
 						class="header__navbar-user-item header__navbar-user-item--logout">
@@ -130,38 +130,6 @@
 	<!-- Header with search -->
 	<div class="header-with-search">
 		<!-- mobile icon -->
-		<div class="mobile-icon-wrap">
-			<label for="mobile-bars-checkbox" class="header__mobile-bars">
-				<i class="header__mobile-bars-icon fas fa-bars"></i>
-			</label> <input type="checkbox" hidden name="" id="mobile-bars-checkbox"
-				class="mobile-bars-input"> <label for="mobile-bars-checkbox"
-				class="nav__overplay"></label>
-			<nav class="nav__mobile">
-				<div class="nav__mobile-close">
-					<label for="mobile-bars-checkbox"> <i class=" fas fa-times"></i>
-					</label>
-				</div>
-				<ul class="nav__mobile-list">
-					<li><a href="" class="nav__mobile-link">Lorem ipsum dolor
-							sit.</a></li>
-					<li><a href="" class="nav__mobile-link">Lorem ipsum dolor
-							sit.</a></li>
-					<li><a href="" class="nav__mobile-link">Lorem ipsum dolor
-							sit.</a></li>
-					<li><a href="" class="nav__mobile-link">Lorem ipsum dolor
-							sit.</a></li>
-					<li><a href="" class="nav__mobile-link">Lorem ipsum dolor
-							sit.</a></li>
-
-				</ul>
-			</nav>
-
-			<label for="mobile-sreach-checkbox" class="header__mobile-sreach">
-				<i class="header__mobile-sreach-icon fas fa-search"></i>
-			</label>
-		</div>
-
-
 		<div class="header__logo hide-on-tablet">
 			<a th:href="@{/home}" class="header__logo-link"> <svg
 					viewBox="0 0 192 65" class="header__logo-img">

@@ -1,5 +1,7 @@
 package com.example.shop.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,5 +16,8 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 	Cart findByUserEntityNotPayUp(@Param("username") String name);
 
 	@Query("SELECT c FROM Cart c JOIN c.userEntity u " + "WHERE u.username = :username AND c.payup = true")
-	Cart findbyHistory(@Param("username") String name);
+	List<Cart> findbyHistory(@Param("username") String name);
+
+	@Query("SELECT c FROM Cart c JOIN c.userEntity u " + "WHERE u.username = :username AND c.payup = true AND c.id = :cid")
+	List<Cart> findbyHistoryTotal(@Param("username") String name, @Param("cid") int id);
 }

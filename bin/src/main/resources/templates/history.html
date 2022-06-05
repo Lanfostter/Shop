@@ -98,8 +98,8 @@
 				</div>
 				<!-- end list -->
 				<!-- history -->
-				<div class="col-9">
-					<div class="row g-0" th:each="c : ${carthistory}">
+				<div class="col-9" th:each="c : ${history}">
+					<div class="row g-0">
 						<div class="col-12 border mb-3"
 							style="background-color: rgb(214, 214, 214);">
 							<div class="input-group m-0">
@@ -116,7 +116,7 @@
 							style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 							<div class="row g-0">
 								<!-- sản phẩm -->
-								<div class="col-12 mt-3">
+								<div class="col-12 mt-3  ">
 									<div class="row g-0">
 										<!-- đánh giá -->
 										<div class="col-6">
@@ -129,27 +129,24 @@
 														GIAO</a></li>
 											</ul>
 										</div>
-										<div class="col-12 border-top mt-4"
-											th:each="ci : ${c.cartIteams}">
+										<div class="col-12 border-top mt-4  ">
 											<div class="row g-0">
 												<div class="col-2 ms-3">
-													<img th:src="@{'/download?image='+${ci.productEntity.img}}"
+													<img src="img/download.png"
 														style="width: 80%; margin: 20px; margin-left: 0;" alt="">
 												</div>
 												<div class="col-7">
 													<!-- tên sp -->
-													<a href="#" class="nav-link text-dark  mt-4 fs-5"
-														th:text="${ci.productEntity.name}"></a>
+													<a href="#" class="nav-link text-dark  mt-4 fs-5" ></a>
 													<!-- phân loại -->
 													<a href="#" class="nav-link text-dark  mt-2 "> Phân
 														loại hàng </a>
 													<!-- số lượng -->
-													<a href="" class="nav-link text-dark  mt-0"
-														th:text="${'x '+ ci.quantity}"></a>
+													<a href="" class="nav-link text-dark  mt-0"> x1</a>
 												</div>
 												<div class="col-2 mt-4">
-													<a href="" class="nav-link text-danger text-center mt-5"
-														th:text="${ci.productEntity.price+'đ'}"> </a>
+													<a href="" class="nav-link text-danger text-center mt-5">222.000
+														đ</a>
 												</div>
 											</div>
 										</div>
@@ -159,17 +156,16 @@
 						</div>
 						<!-- giá -->
 						<div class="col-12 border bg-light"
-							style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
-							>
+							style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
 							<div class="row">
 								<!-- Tổng số tiền -->
 								<div class="col-12  mt-4">
 									<ul class="nav justify-content-end">
-										<li class="nav-item"><a class="nav-link text-dark mt-1 ">Tổng
-												số tiền:</a></li>
+										<li class="nav-item"><a class="nav-link text-dark mt-1 "
+											href="#">Tổng số tiền:</a></li>
 										<!-- tiền -->
 										<li class="nav-item" style="margin-right: 20px;"><a
-											class="nav-link text-danger fs-4 "></a></li>
+											class="nav-link text-danger fs-4 " href="#">2222đ</a></li>
 
 									</ul>
 								</div>
@@ -191,9 +187,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!--end  user infomation-->
 		<!-- chat -->
