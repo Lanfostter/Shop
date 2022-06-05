@@ -38,6 +38,7 @@ public class CartItemController {
 		return "item";
 	}
 
+	// thêm giỏ hàng
 	@GetMapping("/addtocart")
 	public String addToCart(@RequestParam("id") int id, Model model, Principal principal) {
 
@@ -61,7 +62,7 @@ public class CartItemController {
 			if (cartItemRepository.findByProId(id, cart.getId()) != null) {
 				CartItem cartItem = cartItemRepository.findByProId(id, cart.getId());
 				cartItem.setQuantity(cartItem.getQuantity() + 1);
-				
+
 				cartItemRepository.save(cartItem);
 			} else {
 				CartItem cartItem = new CartItem();
@@ -74,6 +75,7 @@ public class CartItemController {
 		return "redirect:/cart/listcartitem";
 	}
 
+	// danh sách sản phẩm trong đơn hàng
 	@GetMapping("/listcartitem")
 	public String listCartItem(Model model, Principal principal) {
 		if (cartRepository.findByUserEntityNotPayUp(principal.getName()) != null) {
@@ -92,6 +94,7 @@ public class CartItemController {
 		return "cart";
 	}
 
+	// cập nhật giỏ hàng
 	@PostMapping("/updatecartitem")
 	public String updateCartItem(@ModelAttribute("cartitem") CartItem cartItem, Principal principal) {
 		cartItemRepository.save(cartItem);
@@ -99,6 +102,7 @@ public class CartItemController {
 
 	}
 
+	// thanh toán
 	@PostMapping("/payup")
 	public String payup(@ModelAttribute("cart") Cart cart) {
 		cart.setBuyDate(new Date());
@@ -106,12 +110,14 @@ public class CartItemController {
 		return "redirect:/cart/history";
 	}
 
+	// Xóa sản phẩm
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") int id) {
 		cartItemRepository.deleteById(id);
 		return "redirect:/cart/listcartitem";
 	}
 
+	// trang lịch sử mua hàng
 	@GetMapping("/history")
 	public String history(Model model, Principal principal) {
 		model.addAttribute("carthistory", cartRepository.findbyHistory(principal.getName()));

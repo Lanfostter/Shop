@@ -34,6 +34,7 @@ public class RegisterController {
 		return "register";
 	}
 
+	// đăng ký cho người dùng và gửi mail
 	@PostMapping("/register")
 	public String userRegister(@Valid @ModelAttribute("user") UserEntity userEntity, @RequestParam("bdate") String date,
 			BindingResult bindingResult) throws Exception {

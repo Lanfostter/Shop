@@ -294,9 +294,8 @@
 								<div class="grid__colum-5">
 									<div class="container-title">
 										<div class="products-contain1">
-											<div class="price-old" th:text="${ci.productEntity.price}+đ"></div>
 											<div class="price-new"
-												th:text="${ci.productEntity.price*43/100}+đ"></div>
+												th:text="${ci.productEntity.price}+đ"></div>
 										</div>
 										<form class="product-quatity__adjust"
 											th:action="@{/cart/updatecartitem}" th:object="${cartitem}"
@@ -317,7 +316,7 @@
 										</form>
 										<div class="products-contain1" style="margin-left: 60px;">
 											<div class="price"
-												th:text="${ci.quantity * (ci.productEntity.price * 43 / 100)}+'đ'"></div>
+												th:text="${ci.quantity * (ci.productEntity.price)}+'đ'"></div>
 										</div>
 
 										<div class="products-contain1">
@@ -367,7 +366,7 @@
 						<input th:name="id" th:value="${c.id}" hidden="true"> <input
 							th:name="userEntity.id" th:value="${c.userEntity.id}"
 							hidden="true"> <input th:name="payup" value="true"
-							hidden="true"> <input th:name="totalprice" th:value="${totalprice1}"
+							hidden="true"> <input th:name="totalprice" th:value="${totalprice1+'đ'}"
 							hidden="true">
 						<button class="pay-btn" type="submit">Mua Hàng</button>
 					</form>

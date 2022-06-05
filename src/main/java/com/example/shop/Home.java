@@ -55,6 +55,7 @@ public class Home {
 	CartItemRepository cartItemRepository;
 	@Autowired
 	UserRepository userRepository;
+
 	// trang chủ, phân trang, tìm kiếm, sắp xếp
 	@GetMapping("/home")
 	public String home(Model model, @RequestParam(name = "name", required = false) String name,
@@ -143,12 +144,14 @@ public class Home {
 		}
 	}
 
+	// xóa sản phẩm trong giỏ hàng trang home
 	@GetMapping("/deleteitemhome")
 	public String deleteItem(@RequestParam("id") int id) {
 		cartItemRepository.deleteById(id);
 		return "redirect:/home";
 	}
 
+	// trang thông tin cá nhân
 	@GetMapping("/userinfo")
 	public String userInfo(Model model, Principal principal) {
 		model.addAttribute("category", categoryRepository.findAll());

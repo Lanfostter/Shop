@@ -112,6 +112,9 @@
 					<li class="header__navbar-user-item"
 						sec:authorize="hasRole('ROLE_ADMIN')"><a
 						th:href="@{/admin/product/list}">Quản lý sản phẩm</a></li>
+						<li class="header__navbar-user-item"
+						sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/admin/user/list}">Quản lý người dùng</a></li>
 					<li class="header__navbar-user-item"
 						sec:authorize="hasRole('ROLE_ADMIN')"><a
 						th:href="@{/admin/category/list}">Quản lý danh mục</a></li>

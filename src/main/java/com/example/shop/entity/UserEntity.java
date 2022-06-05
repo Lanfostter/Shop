@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.CascadeType;
+
 import lombok.Data;
 
 @Entity
@@ -44,8 +46,7 @@ public class UserEntity {
 	private Date birthday;
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "u_role")
-	@CollectionTable(name = "user_role", 
-		joinColumns = @JoinColumn(name = "u_id"))
+	@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "u_id"))
 	private List<String> roles;
 	@OneToMany(mappedBy = "userEntity")
 	private List<Cart> carts;
