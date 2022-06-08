@@ -163,7 +163,7 @@ public class AdminController {
 		}
 		productEntity.setImg(imagineFilename);
 		productRepository.save(productEntity);
-		return "admin/add_product";
+		return "redirect:/admin/product/list";
 	}
 
 	@GetMapping("/product/update")

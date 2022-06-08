@@ -38,23 +38,30 @@ public class RegisterController {
 	// đăng ký cho người dùng và gửi mail
 	@PostMapping("/register")
 	public String userRegister(@Valid @ModelAttribute("user") UserEntity userEntity, @RequestParam("bdate") String date,
-			BindingResult bindingResult) throws Exception {
+			BindingResult bindingResult, Model model) throws Exception {
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
-		List<String> list = new ArrayList<>();
-		list.add("ROLE_MEMBER");
-		userEntity.setRoles(list);
-		MailDTO mailDTO = new MailDTO();
-		mailDTO.setContent("Bạn đã đăng ký thành công");
-		mailDTO.setSubject("Bạn đã đăng ký thành công");
-		mailDTO.setTo(userEntity.getEmail());
-		mailService.sendEmail(mailDTO, userEntity.getUsername(), userEntity.getPassword());
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		userEntity.setBirthday(simpleDateFormat.parse(date));
-		userRepository.save(userEntity);
-		return "redirect:/login";
+		UserEntity check = userRepository.findByUsername(userEntity.getUsername());
+		if (!userEntity.equals(check)) {
+			List<String> list = new ArrayList<>();
+			list.add("ROLE_MEMBER");
+			userEntity.setRoles(list);
+			MailDTO mailDTO = new MailDTO();
+			mailDTO.setContent("Bạn đã đăng ký thành công");
+			mailDTO.setSubject("Bạn đã đăng ký thành công");
+			mailDTO.setTo(userEntity.getEmail());
+			mailService.sendEmail(mailDTO, userEntity.getUsername(), userEntity.getPassword());
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			userEntity.setBirthday(simpleDateFormat.parse(date));
+			userRepository.save(userEntity);
+			return "redirect:/login";
+		} else {
+			model.addAttribute("message", "Tài khoản đã tồn tại");
+			return "register";
+		}
+
 	}
 }

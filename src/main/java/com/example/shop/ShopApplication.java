@@ -2,6 +2,8 @@ package com.example.shop;
 
 import java.util.Locale;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
@@ -18,6 +20,7 @@ public class ShopApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
+
 	}
 
 	@Bean
@@ -46,5 +49,4 @@ public class ShopApplication implements WebMvcConfigurer {
 		bundleMessageSource.setDefaultEncoding("UTF-8");
 		return bundleMessageSource;
 	}
-
 }

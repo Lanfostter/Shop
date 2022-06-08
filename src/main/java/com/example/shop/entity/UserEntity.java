@@ -50,4 +50,18 @@ public class UserEntity {
 	private List<String> roles;
 	@OneToMany(mappedBy = "userEntity")
 	private List<Cart> carts;
+
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof UserEntity) {
+			UserEntity u = (UserEntity) object;
+			if (u.getUsername().equals(this.username)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 }
