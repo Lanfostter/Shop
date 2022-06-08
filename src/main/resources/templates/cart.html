@@ -291,26 +291,26 @@
 								</div>
 
 
-								<div class="grid__colum-5">
+								<div class="grid__colum-5" style="margin-top: 3% ;">
 									<div class="container-title">
 										<div class="products-contain1">
 											<div class="price-new"
 												th:text="${ci.productEntity.price}+đ"></div>
 										</div>
-										<form class="product-quatity__adjust"
+										<form class="product-quatity__adjust" style="margin: 0;"
 											th:action="@{/cart/updatecartitem}" th:object="${cartitem}"
 											method="post">
 											<input th:name="id" th:value="${ci.id}" hidden="true">
 											<input th:name="cart.id" th:value="${ci.cart.id}"
 												hidden="true"> <input th:name="productEntity.id"
 												th:value="${ci.productEntity.id}" hidden="true"> <input
-												style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid; -webkit-border-top-left-radius: 3px 3px; -webkit-border-bottom-left-radius: 3px 3px;"
+												style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid;border-top-left-radius: 3px 3px;border-bottom-left-radius: 3px 3px;"
 												th:onclick="'var result = document.getElementById('+${ci.id}+'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return true'"
 												type="submit" value='-' /> <input
 												style="background-color: white; width: 40px; height: 25px; border: 1px rgb(160, 158, 158) solid; text-align: center;"
 												th:id="${ci.id}" min='1' th:name="quantity" type='text'
 												th:value="${ci.quantity}" /> <input
-												style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid; -webkit-border-top-right-radius: 3px 3px; -webkit-border-bottom-right-radius: 3px 3px;"
+												style="background-color: white; cursor: pointer; height: 25px; border: 1px rgb(160, 158, 158) solid;border-top-right-radius: 3px 3px;border-bottom-right-radius: 3px 3px;"
 												th:onclick="'var result = document.getElementById('+${ci.id}+'); var qty = result.value; if( !isNaN(qty)) result.value++;return true;'"
 												type="submit" value='+' />
 										</form>
@@ -320,7 +320,7 @@
 										</div>
 
 										<div class="products-contain1">
-											<a class="delete" th:href="@{'/cart/delete?id='+${ci.id}}">Xóa</a>
+											<a style="text-decoration: none;" class="delete" th:href="@{'/cart/delete?id='+${ci.id}}">Xóa</a>
 										</div>
 									</div>
 								</div>
@@ -366,7 +366,7 @@
 						<input th:name="id" th:value="${c.id}" hidden="true"> <input
 							th:name="userEntity.id" th:value="${c.userEntity.id}"
 							hidden="true"> <input th:name="payup" value="true"
-							hidden="true"> <input th:name="totalprice" th:value="${totalprice1+'đ'}"
+							hidden="true"> <input th:name="totalprice" th:value="${totalprice1}"
 							hidden="true">
 						<button class="pay-btn" type="submit">Mua Hàng</button>
 					</form>
@@ -501,7 +501,7 @@
 			<div class="grid">
 				<div class="grid__row">
 					<div class="grid__column-3">
-						<span class="footer__center-lable"> © 2021 Shopee. Tất cả
+						<span class="footer__center-lable"> © 2022 Shopee. Tất cả
 							các quyền được bảo lưu. </span>
 					</div>
 					<div class="grid__column-9">

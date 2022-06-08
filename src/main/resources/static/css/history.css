@@ -122,10 +122,11 @@ body{
   .footer-download {
     display: flex;
     align-items: center;
+    margin-l;
   }
   
   .footer-download-img-qr {
-    width: 88px;
+    width: 70px;
     border: 1px solid #e5e5e4;
   }
   

@@ -25,13 +25,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.shop.entity.Cart;
-import com.example.shop.entity.CartItem;
 import com.example.shop.entity.ProductEntity;
 import com.example.shop.entity.UserEntity;
 import com.example.shop.repository.CartItemRepository;

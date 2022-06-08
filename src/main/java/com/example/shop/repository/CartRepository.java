@@ -20,4 +20,6 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 
 	@Query("SELECT c FROM Cart c JOIN c.userEntity u " + "WHERE u.username = :username AND c.payup = true AND c.id = :cid")
 	List<Cart> findbyHistoryTotal(@Param("username") String name, @Param("cid") int id);
+	@Query("SELECT c FROM Cart c WHERE c.payup = true")
+	List<Cart> findallCart();
 }

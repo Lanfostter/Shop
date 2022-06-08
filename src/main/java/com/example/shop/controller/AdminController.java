@@ -25,6 +25,7 @@ import com.example.shop.dto.MailDTO;
 import com.example.shop.entity.CategoryEntity;
 import com.example.shop.entity.ProductEntity;
 import com.example.shop.entity.UserEntity;
+import com.example.shop.repository.CartRepository;
 import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
 import com.example.shop.repository.UserRepository;
@@ -45,6 +46,8 @@ public class AdminController {
 	UserRepository userRepository;
 	@Autowired
 	MailService mailService;
+	@Autowired
+	CartRepository cartRepository;
 
 	@GetMapping("/category/add")
 	public String addCategory(Model model) {
@@ -294,4 +297,11 @@ public class AdminController {
 		return "redirect:/admin/user/list";
 
 	}
+
+	@GetMapping("/cart/list")
+	public String allCart(Model model) {
+		model.addAttribute("allcart", cartRepository.findallCart());
+		return "admin/list_cart";
+	}
+
 }
