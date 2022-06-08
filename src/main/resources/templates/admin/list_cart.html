@@ -55,6 +55,7 @@
 									<th>Name</th>
 									<th>Date</th>
 									<th>Product</th>
+									<th>Image</th>
 									<th>Quantity</th>
 									<th>Price</th>
 									<th>Total Price</th>
@@ -71,6 +72,11 @@
 									<td colspan="1">
 										<div th:each="ci : ${ac.cartIteams}" class="row"
 											th:text="${ci.productEntity.name}"></div>
+									</td>
+									<td colspan="1">
+										<div th:each="ci : ${ac.cartIteams}" class="row"><img
+												style="width: 100px; height: 100px"
+												th:src="@{'/download?image='+${ci.productEntity.img}}" alt=""></div>
 									</td>
 									<td colspan="1">
 										<div th:each="ci : ${ac.cartIteams}" class="row" th:text="${ci.quantity}"></div>
