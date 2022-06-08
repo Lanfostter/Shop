@@ -216,7 +216,7 @@ public class AdminController {
 	@GetMapping("/user/add")
 	public String addUser(Model model) {
 		model.addAttribute("user", new UserEntity());
-		Boolean role = true;
+		String role = null;
 		model.addAttribute("chooserole", role);
 		return "admin/add_user";
 	}
@@ -224,18 +224,19 @@ public class AdminController {
 	// thêm người dùng
 	@PostMapping("/user/add")
 	public String addUser(@Valid @ModelAttribute("user") UserEntity userEntity,
-			@ModelAttribute("chooserole") Boolean chooserole, @RequestParam("bdate") String date,
+			@ModelAttribute("chooserole") String chooserole, @RequestParam("bdate") String date,
 			BindingResult bindingResult) throws Exception {
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
 		List<String> list = new ArrayList<>();
-		if (chooserole = true) {
+		if (chooserole.equals("true")) {
 			list.add("ROLE_ADMIN");
-		} else {
+		} else if (chooserole.equals("false")) {
 			list.add("ROLE_MEMBER");
 
 		}
+		System.out.println(chooserole);
 		userEntity.setRoles(list);
 		MailDTO mailDTO = new MailDTO();
 		mailDTO.setContent("Bạn đã đăng ký thành công");
@@ -253,7 +254,7 @@ public class AdminController {
 	@GetMapping("/user/update")
 	public String updateUser(Model model, @RequestParam("id") int id) {
 		model.addAttribute("newuser", userRepository.findById(id));
-		Boolean role = true;
+		String role = null;
 		model.addAttribute("chooserole", role);
 		return "admin/update_user";
 	}
@@ -261,7 +262,7 @@ public class AdminController {
 	// update người dùng
 	@PostMapping("/user/update")
 	public String updateUser(@Valid @ModelAttribute("newuser") UserEntity userEntity,
-			@ModelAttribute("chooserole") Boolean chooserole,
+			@ModelAttribute("chooserole") String chooserole,
 			@RequestParam("bdate") String date,
 			BindingResult bindingResult) throws Exception {
 		if (bindingResult.hasErrors()) {
@@ -269,13 +270,14 @@ public class AdminController {
 		}
 
 		List<String> list = new ArrayList<>();
-		if (chooserole = true) {
+		if (chooserole.equals("true")) {
 			list.add("ROLE_ADMIN");
-		} else {
+		} else if (chooserole.equals("false")) {
 			list.add("ROLE_MEMBER");
 
 		}
 		userEntity.setRoles(list);
+		System.out.println(chooserole);
 		MailDTO mailDTO = new MailDTO();
 		mailDTO.setContent("Bạn đã đăng ký thành công");
 		mailDTO.setSubject("Bạn đã đăng ký thành công");

@@ -24,12 +24,12 @@
     </header>
     <div class="container-fuild">
         <div style="height: 200px" class="d-flex justify-content-center d-flex align-items-center">
-            <p class="h1">ADD PRODUCT</p>
+            <p class="h1">Update PRODUCT</p>
         </div>
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <form th:action="@{/admin/product/add}" th:object="${newproduct}" method="post"
+                <form th:action="@{/admin/product/update}" th:object="${newproduct}" method="post"
                     enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="disabledTextInput" class="form-label"> ID</label> <input type="text"

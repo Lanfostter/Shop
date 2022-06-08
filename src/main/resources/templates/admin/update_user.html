@@ -24,12 +24,12 @@
     </header>
     <div class="container-fuild">
         <div style="height: 200px" class="d-flex justify-content-center d-flex align-items-center">
-            <p class="h1">Đăng Ký</p>
+            <p class="h1">Cập nhật thông tin</p>
         </div>
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <form th:action="@{/admin/user/add}" th:object="${newuser}" method="POST" id="form-register"
+                <form th:action="@{/admin/user/update}" th:object="${newuser}" method="POST" id="form-register"
                     style="margin-top: 10%" ;>
                     <div class="form-user">
                         <div class="form-user__contain">
@@ -64,8 +64,8 @@
                                     aria-describedby="form-message"> <span class="form-message"></span>
                             </div>
                             <select class="form-select" aria-label="Default select example" name="chooserole">
-                                <option  value="true">ADMIN</option>
-                                <option  value="false">MEMBER</option>
+                                <option value="true">ADMIN</option>
+                                <option value="false">MEMBER</option>
                             </select>
                             <select class="form-select" aria-label="Default select example" th:field="*{gender}">
                                 <option value="Nam">Nam</option>
