@@ -1,5 +1,6 @@
 package com.example.shop.repository;
 
+import java.util.ArrayList;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,10 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 	 */
 	@Query("SELECT p FROM ProductEntity p WHERE p.name LIKE :p")
 	Page<ProductEntity> search(@Param("p") String name, Pageable pageable);
+
 	@Query("SELECT p FROM ProductEntity p JOIN p.categoryEntity c WHERE c.name LIKE :cname")
 	Page<ProductEntity> searchByCategory(@Param("cname") String name, Pageable pageable);
+
+	@Query("SELECT p FROM ProductEntity p WHERE p.name LIKE :p")
+	ArrayList<ProductEntity> findbyName(@Param("p") String name);
 }

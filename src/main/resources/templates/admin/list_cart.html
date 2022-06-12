@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<title>List Cateory</title>
+	<title>Danh sách giỏ hàng</title>
 	<!-- Bootstrap CSS -->
 	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -27,7 +27,7 @@
 		<div class="form-floating mb-3">
 			<div class="row">
 				<div class="col-md d-flex justify-content-end">
-					<form method="get" th:action="@{/#}">
+					<form method="get" th:action="@{/admin/cart/search}">
 						<div class="row">
 							<div class="col-md-2 d-flex justify-content-end">
 								<input style="width: 200px" type="text" name="name" class="form-control"
@@ -41,7 +41,7 @@
 					</form>
 				</div>
 				<div class="col-md">
-					<a th:href="@{/admin/category/add}"><i class="fa-solid fa-plus"></i></a>
+					<a th:href="@{/#}"><i class="fa-solid fa-plus"></i></a>
 				</div>
 			</div>
 			<div>
@@ -67,7 +67,7 @@
 							<tbody>
 								<tr th:each="ac: ${allcart}">
 									<td colspan="1" class="" th:text="${ac.id}"></td>
-									<td colspan="1" th:text="${ac.userEntity.name}"></td>
+									<td colspan="1" th:text="${ac.userEntity.username}"></td>
 									<td colspan="1" th:text="${ac.buyDate}"></td>
 									<td colspan="1">
 										<div th:each="ci : ${ac.cartIteams}" class="row"

@@ -88,6 +88,12 @@ public class AdminController {
 		return "admin/list_category";
 	}
 
+	@GetMapping("/category/search")
+	public String searchCategory(Model model, @RequestParam("name") String name) {
+		model.addAttribute("category", categoryRepository.findByName("%" + name + "%"));
+		return "admin/list_category";
+	}
+
 	// xóa danh mục
 	@GetMapping("/category/delete")
 	public String deleteCategory(@RequestParam("id") int id) {
@@ -198,6 +204,13 @@ public class AdminController {
 		return "redirect:/admin/product/list";
 	}
 
+	@GetMapping("/product/search")
+	public String searchProduct(Model model, @RequestParam("productname") String name) {
+		model.addAttribute("products", productRepository.findbyName("%" + name + "%"));
+		return "admin/list_product";
+
+	}
+
 	// xóa sản phẩm
 	@GetMapping("/product/delete")
 	public String deleteProduct(@RequestParam("id") int id, Model model) {
@@ -295,14 +308,25 @@ public class AdminController {
 	@GetMapping("/user/delete")
 	public String deleteUser(@RequestParam("id") int id) {
 		userRepository.deleteById(id);
-
 		return "redirect:/admin/user/list";
+	}
 
+	@GetMapping("/user/search")
+	public String searchUser(Model model, @RequestParam("nameuser") String name) {
+		System.out.println(name);
+		model.addAttribute("users", userRepository.findByName("%" + name + "%"));
+		return "admin/list_user";
 	}
 
 	@GetMapping("/cart/list")
 	public String allCart(Model model) {
 		model.addAttribute("allcart", cartRepository.findallCart());
+		return "admin/list_cart";
+	}
+
+	@GetMapping("/cart/search")
+	public String searchCart(Model model, @RequestParam("name") String name) {
+		model.addAttribute("allcart", cartRepository.findByUsername("%" + name + "%"));
 		return "admin/list_cart";
 	}
 
