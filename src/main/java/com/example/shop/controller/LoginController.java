@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 	// trang login
 	@GetMapping("/login")
-	public String login(HttpServletRequest request, @RequestParam(name = "e", required = false) String error) {
-		if (error == null) {
-			request.setAttribute("e", error);
+	public String login(HttpServletRequest request, @RequestParam(name = "err", required = false) String error) {
+		if (error != null) {
+			request.setAttribute("e", "Tài Khoản hoặc mật khẩu không đúng");
 		}
 		return "login";
 	}
