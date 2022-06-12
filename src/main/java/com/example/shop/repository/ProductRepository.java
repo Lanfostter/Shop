@@ -14,12 +14,17 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 	/*
 	 * List<ProductEntity> findByName(String name);
 	 */
+
 	@Query("SELECT p FROM ProductEntity p WHERE p.name LIKE :p")
 	Page<ProductEntity> search(@Param("p") String name, Pageable pageable);
 
-	@Query("SELECT p FROM ProductEntity p JOIN p.categoryEntity c WHERE c.name LIKE :cname")
+	@Query("SELECT  p FROM ProductEntity p JOIN p.categoryEntity c WHERE c.name LIKE :cname")
 	Page<ProductEntity> searchByCategory(@Param("cname") String name, Pageable pageable);
 
 	@Query("SELECT p FROM ProductEntity p WHERE p.name LIKE :p")
 	ArrayList<ProductEntity> findbyName(@Param("p") String name);
+
+	// @Query("SELECT p FROM ProductEntity p JOIN p.cartIteams c ORDER BY p.name,
+	// c.quantity DESC")
+	// Page<ProductEntity> findBestSale(Pageable pageable);
 }

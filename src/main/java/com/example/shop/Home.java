@@ -62,19 +62,25 @@ public class Home {
 			@RequestParam(name = "sortBy", required = false) String sortBy,
 			@RequestParam(name = "cat", required = false) String cat, Principal principal) {
 		if (size == null)
-			size = 15;// Số lượng trang
+			size = 7;// Số lượng trang
 		if (page == null)
 			page = 0;// Trang hiện tại
 		// sắp xếp theo id
 		Sort sort = Sort.by("id").ascending();
-
 		if (sortBy != null && sortBy.equals("lowtohigh")) {
 			// sắp xếp giá tăng dần
 			sort = Sort.by("price").ascending();
 		} else if (sortBy != null && sortBy.equals("hightolow")) {
 			// sắp xếp giá giảm dần
 			sort = Sort.by("price").descending();
+		} else if (sortBy != null && sortBy.equals("alphabet")) {
+			// sắp xếp bảng chữ cái
+			sort = Sort.by("name").ascending();
+
 		}
+		// else if (sortBy != null && sortBy.equals("bestsale")) {
+		// sort = Sort.by("cartIteams.quantity").descending();
+		// }
 		// phân trang
 		Pageable pageable = PageRequest.of(page, size, sort);
 		// tìm kiếm theo tên
@@ -94,13 +100,17 @@ public class Home {
 		// tìm kiếm theo danh mục
 		else if (cat != null && !cat.isEmpty()) {
 			Page<ProductEntity> pageProduct = productRepository.searchByCategory("%" + cat + "%", pageable);
-
 			model.addAttribute("list", pageProduct.toList());
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
-		} // danh sách sản phẩm hiện có
+		}
+		// else if (sortBy != null && sortBy.equals("bestsale")) {
+		// Page<ProductEntity> pageProduct = productRepository.findBestSale(pageable);
+		// model.addAttribute("list", pageProduct.toList());
+		// model.addAttribute("totalPage", pageProduct.getTotalPages());
+		// }
+		// danh sách sản phẩm hiện có
 		else {
 			Page<ProductEntity> pageProduct = productRepository.findAll(pageable);
-
 			model.addAttribute("list", pageProduct.toList());
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
 		}
@@ -113,7 +123,6 @@ public class Home {
 		try {
 			Cart cart = new Cart();
 			cart = cartRepository.findByUserEntity(principal.getName());
-
 			model.addAttribute("cart", cart);
 			model.addAttribute("totalitem", cartItemRepository.numberItemCart(principal.getName()));
 
