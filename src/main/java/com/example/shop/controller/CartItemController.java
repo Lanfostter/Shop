@@ -21,7 +21,7 @@ import com.example.shop.repository.ProductRepository;
 import com.example.shop.repository.UserRepository;
 
 @Controller
-@RequestMapping("cart")
+@RequestMapping("/cart")
 public class CartItemController {
 	@Autowired
 	ProductRepository productRepository;
@@ -130,4 +130,41 @@ public class CartItemController {
 		model.addAttribute("totalprice", double1);
 		return "history";
 	}
+
+	@GetMapping("/plustocart")
+	public String plustocart(@RequestParam("id") int id, Model model, Principal principal) {
+
+		model.addAttribute("saleproduct", productRepository.findById(id).get());
+		model.addAttribute("cart", cartRepository.findAll());
+		if (cartRepository.findByUserEntity(principal.getName()) == null) {
+			Cart cart = new Cart();
+			cart.setUserEntity(userRepository.findByUsername(principal.getName()));
+			cart.setBuyDate(new Date());
+			cart.setPayup(false);
+			cart.setTotalprice(0);
+			cartRepository.save(cart);
+			CartItem cartItem = new CartItem();
+			cartItem.setQuantity(1);
+			cartItem.setProductEntity(productRepository.findById(id).get());
+			cartItem.setCart(cart);
+
+			cartItemRepository.save(cartItem);
+		} else {
+			Cart cart = cartRepository.findByUserEntity(principal.getName());
+			if (cartItemRepository.findByProId(id, cart.getId()) != null) {
+				CartItem cartItem = cartItemRepository.findByProId(id, cart.getId());
+				cartItem.setQuantity(cartItem.getQuantity() + 1);
+
+				cartItemRepository.save(cartItem);
+			} else {
+				CartItem cartItem = new CartItem();
+				cartItem.setProductEntity(productRepository.findById(id).get());
+				cartItem.setQuantity(1);
+				cartItem.setCart(cart);
+				cartItemRepository.save(cartItem);
+			}
+		}
+		return "redirect:/home";
+	}
+
 }

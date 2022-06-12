@@ -43,7 +43,7 @@ public class RegisterController {
 			return "register";
 		}
 		UserEntity check = userRepository.findByUsername(userEntity.getUsername());
-		if (!userEntity.equals(check)) {
+		if (!userEntity.getUsername().equals(check.getUsername())) {
 			List<String> list = new ArrayList<>();
 			list.add("ROLE_MEMBER");
 			userEntity.setRoles(list);

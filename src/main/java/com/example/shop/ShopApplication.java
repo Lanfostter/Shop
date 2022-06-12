@@ -2,8 +2,6 @@ package com.example.shop;
 
 import java.util.Locale;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;

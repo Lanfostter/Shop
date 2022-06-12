@@ -15,10 +15,6 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
-		<selenium.version>4.1.1</selenium.version>
-		<webdrivermanager.version>5.0.3</webdrivermanager.version>
-		<cucumber.version>7.2.3</cucumber.version>
-
 	</properties>
 	<dependencies>
 		<dependency>
@@ -100,48 +96,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
-		</dependency>
-		<!--Selenium-->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-		<!--Webdriver Manager-->
-		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>${webdrivermanager.version}</version>
-		</dependency>
-		<!--Cucumber-->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-spring</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-testng</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit-platform-engine</artifactId>
-			<version>${cucumber.version}</version>
 		</dependency>
 	</dependencies>
 
