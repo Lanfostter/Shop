@@ -240,7 +240,7 @@ public class AdminController {
 			@ModelAttribute("chooserole") String chooserole, @RequestParam("bdate") String date,
 			BindingResult bindingResult) throws Exception {
 		if (bindingResult.hasErrors()) {
-			return "register";
+			return "admin/add_user";
 		}
 		List<String> list = new ArrayList<>();
 		if (chooserole.equals("true")) {

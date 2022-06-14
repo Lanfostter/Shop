@@ -24,7 +24,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 	@Query("SELECT p FROM ProductEntity p WHERE p.name LIKE :p")
 	ArrayList<ProductEntity> findbyName(@Param("p") String name);
 
-	// @Query("SELECT p FROM ProductEntity p JOIN p.cartIteams c ORDER BY p.name,
-	// c.quantity DESC")
-	// Page<ProductEntity> findBestSale(Pageable pageable);
+	@Query("SELECT p,SUM(c.quantity) FROM ProductEntity p JOIN p.cartIteams c ORDER BY c.quantity")
+	Page<ProductEntity> findBestSale(Pageable pageable);
 }

@@ -103,11 +103,7 @@ public class Home {
 			model.addAttribute("list", pageProduct.toList());
 			model.addAttribute("totalPage", pageProduct.getTotalPages());
 		}
-		// else if (sortBy != null && sortBy.equals("bestsale")) {
-		// Page<ProductEntity> pageProduct = productRepository.findBestSale(pageable);
-		// model.addAttribute("list", pageProduct.toList());
-		// model.addAttribute("totalPage", pageProduct.getTotalPages());
-		// }
+
 		// danh sách sản phẩm hiện có
 		else {
 			Page<ProductEntity> pageProduct = productRepository.findAll(pageable);

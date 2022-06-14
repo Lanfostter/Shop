@@ -2,28 +2,25 @@
 <html lang="en">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<link rel="stylesheet" th:href="@{/history.css}">
-<link rel="stylesheet"
-	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-<title>ok bé nhá</title>
-<script src="index.js"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/gird.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/history.css}">
+	<link rel="stylesheet"
+		th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+	<title>ok bé nhá</title>
+	<script src="index.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gird.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}">
 </head>
 <script>
-	
+
 </script>
 
 <body>
@@ -42,56 +39,21 @@
 							<div class="row g-0">
 								<!-- avatar -->
 								<div class="col-4">
-									<img src="img/download.png" style="width: 100%;"
-										class="rounded-circle" alt="...">
+									<img th:src="@{/img/pngtree-shopping-cart-image_2228246.jpg}" style="width: 100%;" class="rounded-circle"
+										alt="...">
+								</div>
+								<div class="col-8 ">
+									<div class="row g-0 mt-3  ">
+										<p class="col-12 mb-0 ms-3">Lịch sử mua hàng</p>
+									</div>
 								</div>
 								<!-- name -->
 								<div class="col-8 ">
 									<div class="row g-0 mt-3  ">
-										<p class="col-12 mb-0 ms-3">User</p>
-										<p class="col-12 ms-3">
-											<i class='fas fa-edit'></i> Sủa thông tin
-										</p>
+										<p class="col-12 mb-0 ms-3"></p>
 									</div>
 								</div>
 								<!-- end name -->
-							</div>
-						</div>
-						<div class="row g-0 border-top" style="margin-right: 30px;">
-							<!-- tài khoản -->
-							<div class="col-2 fs-2 ">
-								<i class='fab fa-accessible-icon'></i>
-							</div>
-							<div class="col-9 mt-2 ">
-								<a href="" class="nav-link text-dark"> Tài khoản của bạn </a>
-							</div>
-							<!-- đơn mua -->
-							<div class="col-2 fs-2">
-								<i class='fas fa-shopping-basket'></i>
-							</div>
-							<div class="col-9 mt-2 ">
-								<a href="" class="nav-link text-dark"> Đơn mua </a>
-							</div>
-							<!-- Thông báo -->
-							<div class="col-2 fs-2">
-								<i class='fas fa-bell'></i>
-							</div>
-							<div class="col-9 mt-2 ">
-								<a href="" class="nav-link text-dark"> Thông báo </a>
-							</div>
-							<!-- Kho voucher -->
-							<div class="col-2 fs-2">
-								<i class='fas fa-tag'></i>
-							</div>
-							<div class="col-9 mt-2 ">
-								<a href="" class="nav-link text-dark"> Kho voucher </a>
-							</div>
-							<!--Xu shoppe -->
-							<div class="col-2 fs-2">
-								<i class='fab fa-bitcoin'></i>
-							</div>
-							<div class="col-9 mt-2 ">
-								<a href="" class="nav-link text-dark">Xu shoppe </a>
 							</div>
 						</div>
 					</div>
@@ -100,16 +62,14 @@
 				<!-- history -->
 				<div class="col-9 mt-3">
 					<div class="row g-0 mb-3" th:each="c : ${carthistory}">
-						<div class="col-12 border mb-3"
-							style="background-color: rgb(214, 214, 214);">
+						<div class="col-12 border mb-3" style="background-color: rgb(214, 214, 214);">
 							<div class="input-group m-0">
 								<span class="input-group-text "
 									style="border: none; background-color: rgb(214, 214, 214);"><i
-									class="fa fa-search"></i></span> <input type="text"
-									class="form-control"
+										class="fa fa-search"></i></span> <input type="text" class="form-control"
 									style="border: none; background-color: rgb(214, 214, 214);"
-									placeholder="Tìm kiếm sản phẩm hoặc tên shop"
-									aria-label="Username" aria-describedby="basic-addon1">
+									placeholder="Tìm kiếm sản phẩm hoặc tên shop" aria-label="Username"
+									aria-describedby="basic-addon1">
 							</div>
 						</div>
 						<div class="col-12 bg-light "
@@ -118,39 +78,26 @@
 								<!-- sản phẩm -->
 								<div class="col-12 mt-3">
 									<div class="row g-0">
-										<!-- đánh giá -->
-										<div class="col-11">
-											<ul class="nav justify-content-end">
-
-												<li class="nav-item"><a class="nav-link " href="#"><i
-														class='fas fa-taxi'> Giao hàng thành công </i></a></li>
-												<li class="mt-2">|</li>
-												<li class="nav-item"><a class="nav-link text-danger">ĐÃ
-														GIAO</a></li>
-											</ul>
-										</div>
-										<div class="col-11  mt-4 border-top ms-5"
-											th:each="ci : ${c.cartIteams}">
+										<div class="col-11  mt-4 border-top ms-5" th:each="ci : ${c.cartIteams}">
 											<div class="row g-0 ">
 												<div class="col-2 ms-3 ">
 													<img th:src="@{'/download?image='+${ci.productEntity.img}}"
 														style="width: 100%; margin: 5%; margin-left: 24%;" alt="">
 												</div>
 												<div class="col ms-5 ">
+													<!-- ngày mua -->
+													<a class="nav-link text-dark  mt-4 fs-5" th:text="${'Ngày thanh toán: ' + #dates.format(ci.cart.buyDate,'dd-MM-yyyy')}"></a>
 													<!-- tên sp -->
-													<a href="#" class="nav-link text-dark  mt-4 fs-5"
-														th:text="${ci.productEntity.name}"></a>
-													<!-- phân loại -->
-													<a href="#" class="nav-link text-dark  mt-2 "> Phân
-														loại hàng </a>
+													<a class=" nav-link text-dark  mt-2"
+														th:text="${'Sản phẩm: ' + ci.productEntity.name}"></a>
 													<!-- số lượng -->
-													<a href="" class="nav-link text-dark  mt-0"
-														th:text="${'x '+ ci.quantity}"></a>
+													<a class="nav-link text-dark  mt-0"
+														th:text="${'Số lượng x '+ ci.quantity}"></a>
 												</div>
 												<div class="col-2 mt-4">
-													
-													<a href="" class="nav-link text-danger text-center mt-5"
-														th:text="${ci.productEntity.price+'đ'}"> </a>
+
+													<a class="nav-link text-danger text-center mt-5"
+														th:text="${'Tổng: '+ci.productEntity.price+'đ'}"> </a>
 												</div>
 											</div>
 										</div>
@@ -160,33 +107,16 @@
 						</div>
 						<!-- giá -->
 						<div class="col-12 border bg-light"
-							style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
-							>
+							style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
 							<div class="row">
 								<!-- Tổng số tiền -->
 								<div class="col-12  mt-4">
 									<ul class="nav justify-content-end">
 										<li class="nav-item"><a class="nav-link text-dark mt-1 ">Tổng
-												số tiền:  </a></li>
+												số tiền: </a></li>
 										<!-- tiền -->
 										<li class="nav-item" style="margin-right: 20px;"><a
-											class="nav-link text-danger fs-4 " th:text="${c.totalprice}"></a></li>
-
-									</ul>
-								</div>
-								<!-- đánh giá liên hệ -->
-								<div class="col-12 mb-3">
-									<ul class="nav justify-content-end">
-										<li class="nav-item"><a class="nav-link " href="#"><button
-													type="button" class="btn btn-danger " style="width: 180px;">Đánh
-													Giá</button></a></li>
-										<li class="nav-item"><a class="nav-link" href="#"><button
-													type="button" class="btn btn-danger border"
-													style="width: 180px;">Liên Hệ Người Bán</button></a></li>
-										<li class="nav-item" style="margin-right: 20px;"><a
-											class="nav-link" href="#"><button type="button"
-													class="btn btn-danger border" style="width: 180px;">Mua
-													Lại</button></a></li>
+												class="nav-link text-danger fs-4 " th:text="${c.totalprice}"></a></li>
 
 									</ul>
 								</div>
@@ -197,23 +127,11 @@
 			</div>
 		</div>
 		<!--end  user infomation-->
-		<!-- chat -->
-		
-		<div class="fixed-bottom btn-danger col-1 text-center "
-			style="height: 7%; margin-left: 91%; border-radius: 5px;">
-			<div class="row g-0 fs-2">
-				<div class="col-5">
-					<i class='fas fa-comments'></i>
-				</div>
-				<div class="col-7 text-light">Chat</div>
-			</div>
-		</div>
-		<!-- end chat -->
 		<!-- footer  -->
 		<footer class="footer container-fluid" th:fragment="footer">
 			<div class="grid wide footer-content container-fluid">
-				<div class="row" >
-					<div class="col l " >
+				<div class="row">
+					<div class="col l ">
 						<h3 class="footer__heading">Chăm sóc khách hàng</h3>
 						<ul class="footer-list">
 							<li class="footer-item"><a href="" class="footer-item__link">Trung
@@ -238,9 +156,9 @@
 					<div class="col l">
 						<h3 class="footer__heading">Danh mục</h3>
 						<ul class="footer-list">
-							<li class="footer-item" th:each="c : ${category}"><a href=""
-								class="footer-item__link" th:text="${c.name}"></a></li>
-		
+							<li class="footer-item" th:each="c : ${category}"><a href="" class="footer-item__link"
+									th:text="${c.name}"></a></li>
+
 						</ul>
 					</div>
 					<div class="col l">
@@ -249,30 +167,20 @@
 							<li class="footer-item"><a href="" class="footer-item__link">
 									<i class=" footer-item__icon fab fa-facebook-square"></i>
 									Facebook
-							</a></li>
+								</a></li>
 							<li class="footer-item"><a href="" class="footer-item__link">
 									<i class=" footer-item__icon fab fa-instagram-square"></i>
 									Instagram
-							</a></li>
+								</a></li>
 							<li class="footer-item"><a href="" class="footer-item__link">
 									<i class=" footer-item__icon fab fa-linkedin"></i> LinkedIn
-							</a></li>
+								</a></li>
 						</ul>
 					</div>
-					<div class="col l" >
+					<div class="col l">
 						<h3 class="footer__heading">Vào cửa hàng trên ứng dụng</h3>
 						<div class="footer__download">
-							<img src="source/img/QRcode.png" alt="Download QR"
-								class="footer__download-qr">
-							<div class="footer__download-apps">
-								<a href="" class="footer__download-app-link"> <img
-									src="source/img/appstore.png" alt="Download appstore "
-									class="footer__download-app-img">
-								</a> <a href="" class="footer__download-app-link"> <img
-									src="source/img/chplay.png" alt="Download appstore "
-									class="footer__download-app-img">
-								</a>
-							</div>
+							<img th:src="@{/img/QRcode.png}" alt="Download QR" class="footer__download-qr">
 						</div>
 					</div>
 				</div>
@@ -288,8 +196,7 @@
 								<div class="policy-heading-section">Chính sách trả hàng và
 									hoàn tiền</div>
 							</div>
-							<img src="source/img/policy.png" alt=""
-								class="policy-policy-public-img">
+							<img th:src="@{/img/policy.png}" alt="" class="policy-policy-public-img">
 							<div class="policy-company-name">
 								<span>Công ty Suntech</span>
 							</div>
@@ -299,7 +206,7 @@
 									Học Thủy Lợi cấp ngày 22/5/2022</span> <span>© 2022 - Bản quyền
 									thuộc về công ty Wibu</span>
 							</div>
-		
+
 						</div>
 					</div>
 				</div>
@@ -307,12 +214,10 @@
 		</footer>
 		<!--end footer  -->
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/925bc4635d.js"
-		crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/925bc4635d.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
