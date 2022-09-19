@@ -3,6 +3,7 @@ package com.example.shop.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -17,7 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.CascadeType;
 
 import lombok.Data;
 
@@ -48,7 +48,7 @@ public class UserEntity {
 	@Column(name = "u_role")
 	@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "u_id"))
 	private List<String> roles;
-	@OneToMany(mappedBy = "userEntity")
+	@OneToMany(mappedBy = "userEntity", cascade = CascadeType.REMOVE)
 	private List<Cart> carts;
 
 	@Override

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.shop.dto.MailDTO;
+import com.example.shop.dto.UserDTO;
 import com.example.shop.entity.CategoryEntity;
 import com.example.shop.entity.ProductEntity;
 import com.example.shop.entity.UserEntity;
@@ -30,8 +31,7 @@ import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
 import com.example.shop.repository.UserRepository;
 import com.example.shop.service.MailService;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
+import com.example.shop.service.impl.UserServiceImpl;
 import java.util.List;
 
 @Controller
@@ -48,7 +48,8 @@ public class AdminController {
 	MailService mailService;
 	@Autowired
 	CartRepository cartRepository;
-
+	@Autowired
+	UserServiceImpl userServiceImpl;
 	@GetMapping("/category/add")
 	public String addCategory(Model model) {
 		model.addAttribute("category", new CategoryEntity());
@@ -222,7 +223,7 @@ public class AdminController {
 	// danh sách người dùng
 	@GetMapping("/user/list")
 	public String listUser(Model model) {
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("users", userServiceImpl.getListUser());
 		return "admin/list_user";
 	}
 
@@ -236,7 +237,7 @@ public class AdminController {
 
 	// thêm người dùng
 	@PostMapping("/user/add")
-	public String addUser(@Valid @ModelAttribute("user") UserEntity userEntity,
+	public String addUser(@Valid @ModelAttribute("user") UserDTO userDTO,
 			@ModelAttribute("chooserole") String chooserole, @RequestParam("bdate") String date,
 			BindingResult bindingResult) throws Exception {
 		if (bindingResult.hasErrors()) {
@@ -247,20 +248,18 @@ public class AdminController {
 			list.add("ROLE_ADMIN");
 		} else if (chooserole.equals("false")) {
 			list.add("ROLE_MEMBER");
-
 		}
-		System.out.println(chooserole);
-		userEntity.setRoles(list);
+		userDTO.setRoles(list);
 		MailDTO mailDTO = new MailDTO();
 		mailDTO.setContent("Bạn đã đăng ký thành công");
 		mailDTO.setSubject("Bạn đã đăng ký thành công");
-		mailDTO.setTo(userEntity.getEmail());
-		mailService.sendEmail(mailDTO, userEntity.getUsername(), userEntity.getPassword());
+		mailDTO.setTo(userDTO.getEmail());
+		mailService.sendEmail(mailDTO, 	userDTO.getUsername(), userDTO.getPassword());
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		userEntity.setBirthday(simpleDateFormat.parse(date));
-		userRepository.save(userEntity);
+		userDTO.setBirthday(simpleDateFormat.parse(date));
+		userServiceImpl.create(userDTO);
 		return "redirect:/admin/user/list";
 	}
 
@@ -290,7 +289,6 @@ public class AdminController {
 
 		}
 		userEntity.setRoles(list);
-		System.out.println(chooserole);
 		MailDTO mailDTO = new MailDTO();
 		mailDTO.setContent("Bạn đã đăng ký thành công");
 		mailDTO.setSubject("Bạn đã đăng ký thành công");
@@ -307,7 +305,11 @@ public class AdminController {
 	// xoá người dùng
 	@GetMapping("/user/delete")
 	public String deleteUser(@RequestParam("id") int id) {
-		userRepository.deleteById(id);
+		try {
+			userServiceImpl.delete(id);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return "redirect:/admin/user/list";
 	}
 

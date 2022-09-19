@@ -6,7 +6,6 @@
     height: var(--header-with-search)px;
     background-image: linear-gradient(0, #fe6433, #f53e2d);
 }
-
 .header__navbar{
    display:flex;
    justify-content:space-between;
@@ -479,15 +478,16 @@
 .nav__mobile{
     display: none;
 }
-
-.header__logo{
-    width: 200px ; 
+.header__logo {
+    height: 90px;
+    width: 175px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    overflow: hidden;
 }
 .header__logo-link{
-    color: transparent;
     text-decoration: none;
-    display: block;
-    line-height:0 ;
 }
 .header__logo-img{
     width: 150px ; 

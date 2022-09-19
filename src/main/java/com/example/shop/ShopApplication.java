@@ -2,6 +2,8 @@ package com.example.shop;
 
 import java.util.Locale;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
@@ -46,5 +48,13 @@ public class ShopApplication implements WebMvcConfigurer {
 		bundleMessageSource.setBasename("msg/messages");
 		bundleMessageSource.setDefaultEncoding("UTF-8");
 		return bundleMessageSource;
+	}
+	@Bean
+	public ModelMapper modelMapper() {
+		// Tạo object và cấu hình
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration()
+				.setMatchingStrategy(MatchingStrategies.STANDARD);
+		return modelMapper;
 	}
 }

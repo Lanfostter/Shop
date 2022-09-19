@@ -30,6 +30,8 @@ public class ProductEntity {
 	private double price;
 	@Column(name = "p_description")
 	private String description;
+	@Column(name = "p_quantity")
+	private double quantity;
 	@ManyToOne
 	@JoinColumn(name = "c_id")
 	private CategoryEntity categoryEntity;

@@ -3,6 +3,7 @@ package com.example.shop.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,6 @@ public class Cart {
 	@ManyToOne
 	@JoinColumn(name = "u_id")
 	private UserEntity userEntity;
-	@OneToMany(mappedBy = "cart")
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.REMOVE)
 	private List<CartItem> cartIteams;
 }
