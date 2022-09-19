@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class CartDTO {
+    private int id;
     private Date buyDate;
     private boolean payup;
     private double totalprice;
