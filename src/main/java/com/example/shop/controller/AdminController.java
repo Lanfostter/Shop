@@ -22,15 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.shop.dto.MailDTO;
+import com.example.shop.dto.ProductDTO;
 import com.example.shop.dto.UserDTO;
 import com.example.shop.entity.CategoryEntity;
-import com.example.shop.entity.ProductEntity;
-import com.example.shop.entity.UserEntity;
 import com.example.shop.repository.CartRepository;
 import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
-import com.example.shop.repository.UserRepository;
 import com.example.shop.service.MailService;
+import com.example.shop.service.impl.ProductServiceImpl;
 import com.example.shop.service.impl.UserServiceImpl;
 import java.util.List;
 
@@ -39,11 +38,9 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
-	ProductRepository productRepository;
+	ProductServiceImpl productServiceImpl;
 	@Autowired
 	CategoryRepository categoryRepository;
-	@Autowired
-	UserRepository userRepository;
 	@Autowired
 	MailService mailService;
 	@Autowired
@@ -134,23 +131,24 @@ public class AdminController {
 	}
 
 	// danh sách sản phẩm
+	@Autowired ProductRepository productRepository;
 	@GetMapping("/product/list")
 	public String listProduct(Model model) {
-		model.addAttribute("products", productRepository.findAll());
+		model.addAttribute("products", productServiceImpl.getList());
 		return "admin/list_product";
 
 	}
 
 	@GetMapping("/product/add")
 	public String addProduct(Model model) {
-		model.addAttribute("product", new ProductEntity());
+		model.addAttribute("product", new ProductDTO());
 		model.addAttribute("allcategory", categoryRepository.findAll());
 		return "admin/add_product";
 	}
 
 	// thêm sản phẩm
 	@PostMapping("/product/add")
-	public String addProduct(@ModelAttribute("product") ProductEntity productEntity,
+	public String addProduct(@ModelAttribute("product") ProductDTO productDTO,
 			@RequestParam("imagefile") MultipartFile imagefile) {
 		String originalFilename = imagefile.getOriginalFilename();
 		int lastIndex = originalFilename.lastIndexOf(".");
@@ -168,21 +166,21 @@ public class AdminController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		productEntity.setImg(imagineFilename);
-		productRepository.save(productEntity);
+		productDTO.setImg(imagineFilename);
+		productServiceImpl.create(productDTO);;
 		return "redirect:/admin/product/list";
 	}
 
 	@GetMapping("/product/update")
 	public String updateProduct(Model model, @RequestParam("id") int id) {
-		model.addAttribute("newproduct", productRepository.getById(id));
+		model.addAttribute("newproduct", productServiceImpl.getbyId(id));
 		model.addAttribute("allcategory", categoryRepository.findAll());
 		return "admin/update_product";
 	}
 
 	// cập nhật sản phẩm
 	@PostMapping("/product/update")
-	public String updateProduct(@ModelAttribute("newproduct") ProductEntity productEntity,
+	public String updateProduct(@ModelAttribute("newproduct") ProductDTO productDTO,
 			@RequestParam("imagefile") MultipartFile imagefile) {
 		String originalFilename = imagefile.getOriginalFilename();
 		int lastIndex = originalFilename.lastIndexOf(".");
@@ -200,14 +198,14 @@ public class AdminController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		productEntity.setImg(imagineFilename);
-		productRepository.save(productEntity);
+		productDTO.setImg(imagineFilename);
+		productServiceImpl.create(productDTO);;
 		return "redirect:/admin/product/list";
 	}
 
 	@GetMapping("/product/search")
 	public String searchProduct(Model model, @RequestParam("productname") String name) {
-		model.addAttribute("products", productRepository.findbyName("%" + name + "%"));
+		model.addAttribute("products", productServiceImpl.getbyName(name));
 		return "admin/list_product";
 
 	}
@@ -215,7 +213,7 @@ public class AdminController {
 	// xóa sản phẩm
 	@GetMapping("/product/delete")
 	public String deleteProduct(@RequestParam("id") int id, Model model) {
-		productRepository.deleteById(id);
+		productServiceImpl.delete(id);;
 		return "redirect:/admin/product/list";
 
 	}
@@ -229,12 +227,18 @@ public class AdminController {
 
 	@GetMapping("/user/add")
 	public String addUser(Model model) {
-		model.addAttribute("user", new UserEntity());
+		model.addAttribute("user", new UserDTO());
 		String role = null;
 		model.addAttribute("chooserole", role);
 		return "admin/add_user";
 	}
-
+	@PostMapping("/user/excel/add")
+	public String addByExcel(@RequestParam("excel") MultipartFile file){
+		List<MultipartFile> files = new ArrayList<MultipartFile>();
+		files.add(file);
+		userServiceImpl.importToDB(files);
+		return "redirect:/admin/user/list";
+	}
 	// thêm người dùng
 	@PostMapping("/user/add")
 	public String addUser(@Valid @ModelAttribute("user") UserDTO userDTO,
@@ -265,7 +269,7 @@ public class AdminController {
 
 	@GetMapping("/user/update")
 	public String updateUser(Model model, @RequestParam("id") int id) {
-		model.addAttribute("newuser", userRepository.findById(id));
+		model.addAttribute("newuser", userServiceImpl.findbyId(id));
 		String role = null;
 		model.addAttribute("chooserole", role);
 		return "admin/update_user";
@@ -273,7 +277,7 @@ public class AdminController {
 
 	// update người dùng
 	@PostMapping("/user/update")
-	public String updateUser(@Valid @ModelAttribute("newuser") UserEntity userEntity,
+	public String updateUser(@Valid @ModelAttribute("newuser") UserDTO userDTO,
 			@ModelAttribute("chooserole") String chooserole,
 			@RequestParam("bdate") String date,
 			BindingResult bindingResult) throws Exception {
@@ -288,17 +292,17 @@ public class AdminController {
 			list.add("ROLE_MEMBER");
 
 		}
-		userEntity.setRoles(list);
+		userDTO.setRoles(list);
 		MailDTO mailDTO = new MailDTO();
 		mailDTO.setContent("Bạn đã đăng ký thành công");
 		mailDTO.setSubject("Bạn đã đăng ký thành công");
-		mailDTO.setTo(userEntity.getEmail());
-		mailService.sendEmail(mailDTO, userEntity.getUsername(), userEntity.getPassword());
+		mailDTO.setTo(userDTO.getEmail());
+		mailService.sendEmail(mailDTO, userDTO.getUsername(), userDTO.getPassword());
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		userEntity.setBirthday(simpleDateFormat.parse(date));
-		userRepository.save(userEntity);
+		userDTO.setBirthday(simpleDateFormat.parse(date));
+		userServiceImpl.create(userDTO);
 		return "redirect:/admin/user/list";
 	}
 
@@ -312,11 +316,10 @@ public class AdminController {
 		}
 		return "redirect:/admin/user/list";
 	}
-
+	// tim kiem nguoi dung
 	@GetMapping("/user/search")
 	public String searchUser(Model model, @RequestParam("nameuser") String name) {
-		System.out.println(name);
-		model.addAttribute("users", userRepository.findByName("%" + name + "%"));
+		model.addAttribute("users", userServiceImpl.findbyName(name));
 		return "admin/list_user";
 	}
 

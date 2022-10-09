@@ -74,7 +74,7 @@
 										th:src="@{'/download?image='+${p.img}}" alt=""></td>
 									<td colspan="1" th:text="${p.price}"></td>
 									<td colspan="1" th:text="${p.description}"></td>
-									<td colspan="1" th:text="${p.categoryEntity.name}"></td>
+									<td colspan="1" th:text="${p.categoryDTO.name}"></td>
 									<td colspan="1"><a th:href="@{'/admin/product/update?id='+${p.id}}"><i
 											class="fa-solid fa-user-pen text-primary"></i></a></td>
 									<td colspan="1"><a th:href="@{'/admin/product/delete?id='+${p.id}}"><i

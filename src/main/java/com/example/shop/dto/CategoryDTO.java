@@ -10,6 +10,4 @@ public class CategoryDTO {
     private String name;
     private String img;
     private List<ProductDTO> productDTOs;
-
-
 }
