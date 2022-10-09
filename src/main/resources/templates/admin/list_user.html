@@ -40,24 +40,27 @@
                         </div>
                     </form>
                 </div>
+                <div class="col"><a th:href="@{/admin/user/export-to-excel}" class="btn btn-primary">Download the
+                    Excel File</a>
+            </div>
                 <div class="col-md">
                     <div class="row">
                         <div class="col-md-1"> <a th:href="@{/admin/user/add}"><i class="fa-solid fa-plus"></i></a>
                         </div>
-                    <div class="col">
-                        <form    th:action="@{/admin/user/excel/add}" method="POST" id="form-excel"
-                        style="margin-top: 10%" enctype="multipart/form-data";>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="formFile" class="form-label">Excel File</label>
-                                    <input class="form-control" type="file" id="formFile" name="excel">
+                        <div class="col">
+                            <form th:action="@{/admin/user/excel/add}" method="POST" id="form-excel"
+                                style="margin-top: 10%" enctype="multipart/form-data" ;>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="formFile" class="form-label">Excel File</label>
+                                        <input class="form-control" type="file" id="formFile" name="excel">
+                                    </div>
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary">Import</button>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary">Import</button>
-                                </div>
-                            </div>
-                        <form>
-                    </div>
+                                <form>
+                        </div>
                     </div>
                 </div>
                 <div>

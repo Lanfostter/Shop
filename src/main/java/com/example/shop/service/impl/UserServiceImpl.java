@@ -147,7 +147,9 @@ public class UserServiceImpl implements UserServiceDAO {
                         userDTOs.add(userDTO);
                     }
                     for (UserDTO userDTO : userDTOs) {
-                        userRepository.save(convertToEntity(userDTO));
+                        if (userRepository.findByUsername(userDTO.getUsername()) == null) {
+                            userRepository.save(convertToEntity(userDTO));
+                        }
                     }
 
                     workbook.close();

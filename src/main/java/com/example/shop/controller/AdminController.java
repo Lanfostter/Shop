@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ import com.example.shop.entity.CategoryEntity;
 import com.example.shop.repository.CartRepository;
 import com.example.shop.repository.CategoryRepository;
 import com.example.shop.repository.ProductRepository;
+import com.example.shop.service.ExcelGenerator;
 import com.example.shop.service.MailService;
 import com.example.shop.service.impl.ProductServiceImpl;
 import com.example.shop.service.impl.UserServiceImpl;
@@ -47,6 +50,7 @@ public class AdminController {
 	CartRepository cartRepository;
 	@Autowired
 	UserServiceImpl userServiceImpl;
+
 	@GetMapping("/category/add")
 	public String addCategory(Model model) {
 		model.addAttribute("category", new CategoryEntity());
@@ -131,7 +135,9 @@ public class AdminController {
 	}
 
 	// danh sách sản phẩm
-	@Autowired ProductRepository productRepository;
+	@Autowired
+	ProductRepository productRepository;
+
 	@GetMapping("/product/list")
 	public String listProduct(Model model) {
 		model.addAttribute("products", productServiceImpl.getList());
@@ -167,7 +173,8 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		productDTO.setImg(imagineFilename);
-		productServiceImpl.create(productDTO);;
+		productServiceImpl.create(productDTO);
+		;
 		return "redirect:/admin/product/list";
 	}
 
@@ -199,7 +206,8 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		productDTO.setImg(imagineFilename);
-		productServiceImpl.create(productDTO);;
+		productServiceImpl.create(productDTO);
+		;
 		return "redirect:/admin/product/list";
 	}
 
@@ -213,7 +221,8 @@ public class AdminController {
 	// xóa sản phẩm
 	@GetMapping("/product/delete")
 	public String deleteProduct(@RequestParam("id") int id, Model model) {
-		productServiceImpl.delete(id);;
+		productServiceImpl.delete(id);
+		;
 		return "redirect:/admin/product/list";
 
 	}
@@ -232,13 +241,15 @@ public class AdminController {
 		model.addAttribute("chooserole", role);
 		return "admin/add_user";
 	}
+
 	@PostMapping("/user/excel/add")
-	public String addByExcel(@RequestParam("excel") MultipartFile file){
+	public String addByExcel(@RequestParam("excel") MultipartFile file) {
 		List<MultipartFile> files = new ArrayList<MultipartFile>();
 		files.add(file);
 		userServiceImpl.importToDB(files);
 		return "redirect:/admin/user/list";
 	}
+
 	// thêm người dùng
 	@PostMapping("/user/add")
 	public String addUser(@Valid @ModelAttribute("user") UserDTO userDTO,
@@ -258,7 +269,7 @@ public class AdminController {
 		mailDTO.setContent("Bạn đã đăng ký thành công");
 		mailDTO.setSubject("Bạn đã đăng ký thành công");
 		mailDTO.setTo(userDTO.getEmail());
-		mailService.sendEmail(mailDTO, 	userDTO.getUsername(), userDTO.getPassword());
+		mailService.sendEmail(mailDTO, userDTO.getUsername(), userDTO.getPassword());
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -316,6 +327,7 @@ public class AdminController {
 		}
 		return "redirect:/admin/user/list";
 	}
+
 	// tim kiem nguoi dung
 	@GetMapping("/user/search")
 	public String searchUser(Model model, @RequestParam("nameuser") String name) {
@@ -335,4 +347,15 @@ public class AdminController {
 		return "admin/list_cart";
 	}
 
+	@GetMapping("/user/export-to-excel")
+	public void exportIntoExcelFile(HttpServletResponse response) throws IOException {
+		response.setContentType("application/octet-stream");
+		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+		String currentDateTime = date.format(new Date());
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=user" + currentDateTime + ".xlsx";
+		response.setHeader(headerKey, headerValue);
+		ExcelGenerator generator = new ExcelGenerator(userServiceImpl.getListUser());
+		generator.generateExcelFile(response);
+	}
 }
