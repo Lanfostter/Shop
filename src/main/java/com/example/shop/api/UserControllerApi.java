@@ -18,49 +18,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.example.shop.entity.CategoryEntity;
+import com.example.shop.dto.UserDTO;
 import com.example.shop.entity.UserEntity;
 import com.example.shop.repository.UserRepository;
+import com.example.shop.service.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserControllerApi {
 	@Autowired
-	UserRepository userRepository;
+	UserServiceImpl userServiceImpl;
 
 	@PostMapping("/add")
-	public UserEntity userEntity(@ModelAttribute("user") @Validated UserEntity userEntity) {
+	public UserDTO addUser(@RequestBody UserDTO userDTO) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		userRepository.save(userEntity);
-		return userEntity;
+		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+		userServiceImpl.create(userDTO);
+		return userDTO;
 	}
 
 	@GetMapping("/list")
-	public List<UserEntity> getAll() {
-		return userRepository.findAll();
+	public List<UserDTO> getAll() {
+		return userServiceImpl.getListUser();
 	}
 
 	@DeleteMapping("/delete")
 	public void delete(@RequestParam("id") int id) {
-		userRepository.deleteById(id);
+		userServiceImpl.delete(id);
 	}
 
-	@PutMapping("/update")
-	public void update(@RequestBody @Validated UserEntity userEntity) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		UserEntity oldOne = userRepository.getById(userEntity.getId());
-		oldOne.setName(userEntity.getName());
-		oldOne.setUsername(userEntity.getUsername());
-		oldOne.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		oldOne.setRoles(userEntity.getRoles());
-		userRepository.save(oldOne);
-	}
+	// @PutMapping("/update")
+	// public void update(@RequestBody @Validated UserEntity userEntity) {
+	// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	// UserEntity oldOne = userRepository.getById(userEntity.getId());
+	// oldOne.setName(userEntity.getName());
+	// oldOne.setUsername(userEntity.getUsername());
+	// oldOne.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+	// oldOne.setRoles(userEntity.getRoles());
+	// userRepository.save(oldOne);
+	// }
 
-	@GetMapping("search")
-	public UserEntity getUserEntity(@RequestParam("name") String name) {
-		return userRepository.findByUsername(name);
-	}
+	// @GetMapping("search")
+	// public UserEntity getUserEntity(@RequestParam("name") String name) {
+	// return userRepository.findByUsername(name);
+	// }
 }

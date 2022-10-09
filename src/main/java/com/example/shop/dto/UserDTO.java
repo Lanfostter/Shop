@@ -18,6 +18,6 @@ public class UserDTO {
     private String password;
     private String gender;
     private Date birthday;
-    private List<String> roles; 
-    
+    private List<String> roles;
+
 }

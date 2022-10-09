@@ -5,9 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -87,81 +89,74 @@ public class UserServiceImpl implements UserServiceDAO {
     @Override
     public void importToDB(List<MultipartFile> files) {
         if (!files.isEmpty()) {
-            List<UserDTO> userDTOs = new ArrayList<UserDTO>();
             for (MultipartFile file : files) {
                 try {
                     XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
                     XSSFSheet sheet = workbook.getSheetAt(0);
-                    for (int rowIndex = 0; rowIndex < getNumberOfNonEmptyCells(sheet, 0) - 1; rowIndex++) {
-                        XSSFRow row = sheet.getRow(rowIndex);
-                        if (rowIndex == 0) {
+                    Iterator<Row> rows = sheet.iterator();
+                    List<UserDTO> userDTOs = new ArrayList<UserDTO>();
+                    int rowNumber = 0;
+                    while (rows.hasNext()) {
+                        Row currentRow = rows.next();
+                        // skip header
+                        if (rowNumber == 0) {
+                            rowNumber++;
                             continue;
                         }
-                        int id = Integer.parseInt(getValue(row.getCell(0)).toString());
-                        String name = String.valueOf(row.getCell(2));
-                        String email = String.valueOf(row.getCell(3));
-                        String username = String.valueOf(row.getCell(4));
-                        String password = String.valueOf(row.getCell(5));
-                        String gender = String.valueOf(row.getCell(5));
-                        String birthday = String.valueOf(row.getCell(6));
-                        String role = String.valueOf(row.getCell(7));
-                        List<String> roles = new ArrayList<String>();
-                        roles.add(role);
-                        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(birthday);
-                        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-                        UserDTO userDTO = new UserDTO(id, name, email, username, bCryptPasswordEncoder.encode(password),
-                                gender, date, roles);
+                        Iterator<Cell> cellsInRow = currentRow.iterator();
+                        UserDTO userDTO = new UserDTO();
+                        int cellIdx = 0;
+                        while (cellsInRow.hasNext()) {
+                            Cell currentCell = cellsInRow.next();
+                            switch (cellIdx) {
+                                case 0:
+                                    userDTO.setName(currentCell.getStringCellValue());
+                                    break;
+                                case 1:
+                                    userDTO.setEmail(currentCell.getStringCellValue());
+                                    break;
+                                case 2:
+                                    userDTO.setUsername(currentCell.getStringCellValue());
+                                    break;
+                                case 3:
+                                    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                                    userDTO.setPassword(encoder.encode(currentCell.getStringCellValue()));
+                                    break;
+                                case 4:
+                                    userDTO.setGender(currentCell.getStringCellValue());
+                                    break;
+                                case 5:
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    try {
+                                        userDTO.setBirthday(dateFormat.parse(currentCell.getStringCellValue()));
+                                    } catch (ParseException e) {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                    }
+                                    break;
+                                case 6:
+                                    List<String> roles = new ArrayList<String>();
+                                    roles.add(currentCell.getStringCellValue());
+                                    userDTO.setRoles(roles);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            cellIdx++;
+                        }
                         userDTOs.add(userDTO);
                     }
+                    for (UserDTO userDTO : userDTOs) {
+                        userRepository.save(convertToEntity(userDTO));
+                    }
+
+                    workbook.close();
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                } catch (ParseException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
-                if(!userDTOs.isEmpty()){
-                    for(UserDTO userDTO : userDTOs){
-                    userRepository.save(convertToEntity(userDTO));
-                    }
-                }
+
             }
         }
-    }
-
-    private Object getValue(Cell cell) {
-        switch (cell.getCellType()) {
-            case STRING:
-                return cell.getStringCellValue();
-            case NUMERIC:
-                return String.valueOf((int) cell.getNumericCellValue());
-            case BOOLEAN:
-                return cell.getBooleanCellValue();
-            case ERROR:
-                return cell.getErrorCellValue();
-            case FORMULA:
-                return cell.getCellFormula();
-            case BLANK:
-                return null;
-            case _NONE:
-                return null;
-            default:
-                break;
-        }
-        return null;
-    }
-
-    public static int getNumberOfNonEmptyCells(XSSFSheet sheet, int collumnIndex) {
-        int numOfNonEmptyCells = 0;
-        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
-            XSSFRow row = sheet.getRow(i);
-            if (row != null) {
-                XSSFCell cell = row.getCell(collumnIndex);
-                if (cell != null) {
-                    numOfNonEmptyCells++;
-                }
-            }
-        }
-        return numOfNonEmptyCells;
     }
 }
