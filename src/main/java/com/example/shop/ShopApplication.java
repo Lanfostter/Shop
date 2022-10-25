@@ -2,6 +2,8 @@ package com.example.shop;
 
 import java.util.Locale;
 
+import javax.persistence.Table;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +26,7 @@ public class ShopApplication implements WebMvcConfigurer {
 		SpringApplication.run(ShopApplication.class, args);
 
 	}
-
+	
 	@Bean
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
