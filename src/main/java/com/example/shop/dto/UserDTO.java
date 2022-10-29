@@ -3,6 +3,8 @@ package com.example.shop.dto;
 import java.util.Date;
 import java.util.List;
 
+import com.example.shop.entity.UserEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

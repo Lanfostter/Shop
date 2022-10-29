@@ -17,6 +17,7 @@ import com.example.shop.repository.UserRepository;
 public class LoginService implements UserDetailsService {
 	@Autowired
 	UserRepository userRepository;
+
 	// xác minh tài khoản trả về người dùng hiện tại
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -28,6 +29,7 @@ public class LoginService implements UserDetailsService {
 		for (String role : userEntity.getRoles()) {
 			list.add(new SimpleGrantedAuthority(role));
 		}
+		System.out.println(userEntity.getPassword());
 		org.springframework.security.core.userdetails.User currentUser = new org.springframework.security.core.userdetails.User(
 				username, userEntity.getPassword(), list);
 		return currentUser;

@@ -26,6 +26,7 @@ import com.example.shop.repository.UserRepository;
 import com.example.shop.service.UserServiceDAO;
 
 @Service
+
 public class UserServiceImpl implements UserServiceDAO {
     @Autowired
     ModelMapper modelMapper;

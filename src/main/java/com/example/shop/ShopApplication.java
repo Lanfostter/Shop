@@ -20,13 +20,14 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @SpringBootApplication
 @EnableJpaAuditing
+
 public class ShopApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
 
 	}
-	
+
 	@Bean
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
@@ -53,6 +54,7 @@ public class ShopApplication implements WebMvcConfigurer {
 		bundleMessageSource.setDefaultEncoding("UTF-8");
 		return bundleMessageSource;
 	}
+
 	@Bean
 	public ModelMapper modelMapper() {
 		// Tạo object và cấu hình
