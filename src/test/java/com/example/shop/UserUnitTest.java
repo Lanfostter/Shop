@@ -99,7 +99,12 @@ public class UserUnitTest {
         verify(userRepository).save(testEntity);
         assertNotNull(testEntity.getId());
         assertNotNull(testEntity.getName());
-        assertEquals(dateFormat.parse("12/12/2022"), entity.getBirthday());
+        assertNotNull(testEntity.getGender());
+        assertNotNull(testEntity.getEmail());
+        assertNotNull(testEntity.getUsername());
+        assertNotNull(testEntity.getPassword());
+        assertNotNull(testEntity.getRoles());
+        assertEquals(dateFormat.parse("12/12/2001"), entity.getBirthday());
     }
 
     @Test

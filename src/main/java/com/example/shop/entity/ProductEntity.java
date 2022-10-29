@@ -1,6 +1,7 @@
 package com.example.shop.entity;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
