@@ -58,6 +58,7 @@ public class CartItemUnitTest {
         cartItem.setCart(cart);
         CartItem cartItemTest = mock(CartItem.class);
         cartItemTest = cartItem;
+
         assertNull(cartItemRepository.save(cartItemTest));
         assertNotNull(cartItemTest.getQuantity());
         verify(cartItemRepository).save(cartItemTest);
